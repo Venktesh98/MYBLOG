@@ -22,9 +22,10 @@ class BlogController extends Controller
 
     }
 
-    public function show($id)
+    // public function show($id)
+    public function show(Post $postid)  # here it is called as injecting the model here
     {
-        $post = Post::findOrFail($id);
-        return view('blog.show')->with("posts",$post);
+        // $post = Post::findOrFail($id);
+        return view('blog.show')->with("posts",$postid);
     }
 }
