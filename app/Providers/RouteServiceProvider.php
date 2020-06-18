@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Post;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,9 +24,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Implemnetation of slug here i.e for passing some text in url  instead of simple id
 
         parent::boot();
+
+        Route::bind('postid',function($slug){
+            return Post::where('slug',$slug)->first();
+        });
     }
 
     /**
