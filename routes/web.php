@@ -14,14 +14,12 @@ if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
 |
 */
 
-// Route::get('/', function () {
-//     return view('blog.index');
-// });
+// Route::get('/',[
+//     'uses'=>'BlogController@index',
+//     'as' => 'blog'
+//     ]);
 
-// Route::get('/',['uses'=>'BlogController@index',]);
 Route::get('/','BlogController@index');
 
-Route::get('/blog/show', function () {
-    return view('blog.show');
-});
+Route::get('/blog/{postid}', 'BlogController@show')->name('blog.show');
 
