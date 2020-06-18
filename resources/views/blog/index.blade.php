@@ -5,6 +5,8 @@
         <div class="row">
             <div class="col-md-8">
                 @foreach ($posts_send as $post)     <!-- foreach loop -->
+                @if (count($post))
+                    
                     <article class="post-item">
                         @if ($post->image_url)
                             <div class="post-item-image">
@@ -16,7 +18,7 @@
                         <div class="post-item-body">
                             <div class="padding-10">
                                 <h2><a href="{{ route('blog.show',$post->slug) }}">{{$post->title}}</a></h2>
-                                <p> {{ $post->excerpt }} </p>
+                                 {!! $post->excerpt_html !!}   <!-- called from accessor function from the post model. -->
                             </div>
                             
                             <div class="post-meta padding-10 clearfix">
@@ -34,6 +36,7 @@
                             </div>
                         </div>
                     </article>
+                @endif
                 @endforeach
                     <nav>
                     {{$posts_send->links() }}   <!-- for pagination -->
