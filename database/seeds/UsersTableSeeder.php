@@ -18,18 +18,18 @@ class UsersTableSeeder extends Seeder
         // generate 3 users/author
         DB::table('users')->insert([
             [
-                'name' => "vgs",
-                'email' => "vgs@test.com",
+                'name' => "John Doe",
+                'email' => "johndoe@test.com",
                 'password' => bcrypt('secret')
             ],
             [
-                'name' => "omni",
-                'email' => "omni@test.com",
+                'name' => "Jane Doe",
+                'email' => "janedoe@test.com",
                 'password' => bcrypt('secret')
             ],
             [
-                'name' => "bhs",
-                'email' => "bhs@test.com",
+                'name' => "Edo Masaru",
+                'email' => "edo@test.com",
                 'password' => bcrypt('secret')
             ],
         ]);
