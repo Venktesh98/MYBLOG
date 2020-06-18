@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    protected $author = ['name'];
     
     public function index()
     {
@@ -16,7 +15,7 @@ class BlogController extends Controller
 
         $post = Post::with('author')->latestFirst()->paginate(3);
         // $post = Post::orderBy('created_at','asc')->paginate(5);
-        return view('blog.index')->with('posts_send',$post);
+        return view('blog.index')->with('posts_send',$post);   # remove return and add render () for DB query
         // dd("blog msg");
         // dd(\DB::getQueryLog());
 
