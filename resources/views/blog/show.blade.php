@@ -24,7 +24,8 @@
                                     <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                                 </ul>
                             </div>
-                            {{ $posts->body }}
+                                {!! $posts->body_html !!}  <!-- Accessor function i.e body_html - from post model -->
+                            {{-- {{ $posts->body }} --}}
                         </div>
                     </div>
                 </article>
