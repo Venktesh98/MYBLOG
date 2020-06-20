@@ -23,3 +23,5 @@ Route::get('/','BlogController@index');
 
 Route::get('/blog/{postid}', 'BlogController@show')->name('blog.show');
 
+Route::get('/category/{category}','BlogController@category')->name('blog.category');
+
