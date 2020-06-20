@@ -14,6 +14,11 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     
     // Defining the Accesssor function for image attribute over here that is called when model is called 
     public function getImageUrlAttribute($value)
@@ -32,26 +37,27 @@ class Post extends Model
         return $imageUrl;
     }
 
-    // Accessor Function
+    // Accessor Function for date attribute
     public function getDateAttribute($value)
     {
         // return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();     # will creats the date for human readble form.
         return is_null($this->created_at) ? '' : $this->created_at->diffForHumans();
     }
 
-    // Accessor Function
+    // Accessor Function for getting the html attribute for body
     public function getBodyHtmlAttribute($value)
     {
          return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL;  # e is laravel helper function that is used for security purpose.
     }
 
-    // Accessor Function
+    // Accessor Function for getting the html attribute for excerpt
     public function getExcerptHtmlAttribute($value)
     {
          return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;  # e is laravel helper function that is used for security purpose.
     }
 
-    // Scope
+    
+    // Scope for fetching the latest post
     public function scopeLatestFirst($query)
     {
         return $query->orderBy('published_at','desc');
