@@ -39,10 +39,12 @@ class PostsTableSeeder extends Seeder
                 'created_at' => $createdDate,
                 'updated_at' => $createdDate,
                 'published_at' => $i < 5 ? $publishedDate : (rand(0,1) == 0 ? Null : $publishedDate->addDays(4)),
+                'category_id'=> rand(1,5),
             ];
             
         }
-        echo("TYPE IS ======".gettype($posts));
+        echo("TYPE IS ==:".gettype($posts));
+        echo "\n";
 
         DB::table('posts')->insert($posts);
     }
