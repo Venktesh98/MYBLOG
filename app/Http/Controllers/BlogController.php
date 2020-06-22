@@ -30,11 +30,10 @@ class BlogController extends Controller
         // $posts = Category::findOrFail($id)->posts()->with('author')->latestFirst()->paginate($this->limit); 
         $posts = $category->posts()->with('author')->latestFirst()->paginate($this->limit);
         return view('blog.index')->with('posts_send',$posts)->with('categoryName',$categoryName);
-
     } 
 
     // public function show($id)
-    public function show(Post $postid)  # here it is called as injecting the model here
+    public function show(Post $postid)  # here it is called as injecting the model here and slug comes from the RouteServiceProvider.php file
     {
         // $post = Post::findOrFail($id);
         $postid->increment('view_count');       // updating the view count whenever user refresh it.
