@@ -67,4 +67,5 @@ class Post extends Model
     // {
     //     return $query->where("published_at","<=",Carbon::now());   # not working coz of php version might be
     // } 
+
 }
