@@ -37,6 +37,25 @@ class Post extends Model
         return $imageUrl;
     }
 
+    // Accessor function for the thumbnails
+    public function getImageThumbUrlAttribute($value)
+    {
+        $imageUrl = "";
+
+        if(! is_null($this->image)) # image is the attribute in the database.
+        {   
+            $ext = substr(strrchr($this->image,'.') ,1);
+            $thumbnail = str_replace(".{$ext}","_thumb.{$ext}",$this->image);   
+            $imagePath = public_path() . "/img/" . $thumbnail;  # public_path() is the helper function to get the path of the public directory
+            if(file_exists($imagePath)) 
+            {
+                $imageUrl = asset("img/" . $thumbnail); # gets the relevant path of the image if the image exists using asset().
+        
+            }
+        }
+        return $imageUrl;
+    }
+
     // Accessor Function for date attribute
     public function getDateAttribute($value)
     {
@@ -61,6 +80,11 @@ class Post extends Model
     public function scopeLatestFirst($query)
     {
         return $query->orderBy('published_at','desc');
+    }
+
+    public function scopePopular($query)
+    {
+        return $query->orderBy('view_count','desc');
     }
 
     // public function scopePublished($query)
