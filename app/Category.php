@@ -22,7 +22,7 @@ class Category extends Model
     //     return $this->slug;
     // }
 
-    public function getRouteKeyName()
+    public function getRouteKeyName()   # called as binding with url
     {
         return 'slug';
     }
