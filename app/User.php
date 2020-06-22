@@ -42,6 +42,17 @@ class User extends Authenticatable
 
         return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
     }
+
+    // Accessor Function
+    // public function getGravatarImageAttribute($value)
+    // {
+    //     $email = $this->email;
+    //     $default = "https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png";
+    //     $size = 20;
+
+    //     return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+    // }
+
     public function getRouteKeyName()
     {
         return 'slug';
