@@ -18,6 +18,7 @@ class BlogController extends Controller
         $this->limit = 3;
         $post = Post::with('author')->latestFirst()->paginate($this->limit);
         return view('blog.index')->with('posts_send',$post);   # remove return and add render() at last in view statement for DB query
+        
         // dd("blog msg");
         // dd(\DB::getQueryLog());
     }
@@ -28,7 +29,6 @@ class BlogController extends Controller
         $categoryName = $category->title;
         // $posts = Category::findOrFail($id)->posts()->with('author')->latestFirst()->paginate($this->limit); 
         $posts = $category->posts()->with('author')->latestFirst()->paginate($this->limit);
-
         return view('blog.index')->with('posts_send',$posts)->with('categoryName',$categoryName);
 
     }
