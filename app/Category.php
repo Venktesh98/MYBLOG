@@ -17,8 +17,13 @@ class Category extends Model
     //     return $this->title;   
     // }
 
-    public function getCategorySlugAttribute($value)
+    // public function getCategorySlugAttribute($value)
+    // {
+    //     return $this->slug;
+    // }
+
+    public function getRouteKeyName()
     {
-        return $this->slug;
+        return 'slug';
     }
 }
