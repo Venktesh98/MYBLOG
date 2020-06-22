@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Category; 
-use App\Post;
+use App\Views\Composer\NavigationComposer;
+// use App\Category; 
+// use App\Post;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -15,17 +16,19 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('layouts.sidebar',function($view){
-            $categories = Category::with('posts')->orderBy('title','asc')->get();
+        view()->composer('layouts.sidebar',NavigationComposer::class); # invokes to the NavigationComposer file.
 
-            return $view->with('categories',$categories);
-        });
+        // view()->composer('layouts.sidebar',function($view){
+        //     $categories = Category::with('posts')->orderBy('title','asc')->get();
 
-        view()->composer('layouts.sidebar',function($view){
+        //     return $view->with('categories',$categories);
+        // });
 
-            $popular_posts = Post::latestFirst()->popular()->take(3)->get();
-            return $view->with('popularposts',$popular_posts);
-        });
+        // view()->composer('layouts.sidebar',function($view){
+
+        //     $popular_posts = Post::latestFirst()->popular()->take(3)->get();
+        //     return $view->with('popularposts',$popular_posts);
+        // });
     }
 
     /**
