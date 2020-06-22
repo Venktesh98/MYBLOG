@@ -17,9 +17,9 @@
             </div>
             <div class="widget-body">
                 <ul class="categories">
-                    @foreach ($categories as $category)
+                    @foreach ($categories as $category) <!-- categories is coming from the providers.composerServiceProvider file -->
                         <li>
-                            <a href="{{ route('blog.category',$category->id) }}"><i class="fa fa-angle-right"></i> {{$category->title}}</a>
+                            <a href="{{ route('blog.category',$category->slug) }}"><i class="fa fa-angle-right"></i> {{$category->title}}</a>
                             <span class="badge pull-right">{{$category->posts->count()}}</span>
                         </li>
                     @endforeach

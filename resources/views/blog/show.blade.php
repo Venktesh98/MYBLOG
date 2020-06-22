@@ -18,7 +18,7 @@
 
                             <div class="post-meta no-border">
                                 <ul class="post-meta-group">
-                                    <li><i class="fa fa-user"></i><a href="#"> {{$posts->author->name}}</a></li>
+                                    <li><i class="fa fa-user"></i><a href="{{ route('blog.author',$posts->author->slug) }}"> {{$posts->author->name}}</a></li>
                                     <li><i class="fa fa-clock-o"></i><time> {{$posts->date}}</time></li>
                                     <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
                                     <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
@@ -38,11 +38,12 @@
                         </a>
                       </div>
                       <div class="media-body">
-                        <h4 class="media-heading"><a href="#">{{$posts->author->name}}</a></h4>
+                        <h4 class="media-heading"><a href="{{ route('blog.author',$posts->author->slug) }}">{{$posts->author->name}}</a></h4>
                         <div class="post-author-count">
-                          <a href="#">
+                          <a href="{{ route('blog.author',$posts->author->slug) }}">
                               <i class="fa fa-clone"></i>
-                              90 posts
+                              <?php $postCount = $posts->author->posts->count() ?> <!-- defining a variable of postCount -->
+                              {{ $postCount }} {{ str_plural('post',$postCount) }} <!-- helper function for plural -->
                           </a>
                         </div>
                         {{ $posts->title }}
