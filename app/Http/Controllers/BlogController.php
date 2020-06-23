@@ -33,7 +33,7 @@ class BlogController extends Controller
     } 
 
     // public function show($id)
-    public function show(Post $postid)  # here it is called as injecting the model here and slug comes from the RouteServiceProvider.php file
+    public function show(Post $postid)  # here it is called as injecting the model here and slug comes from the /Providers/RouteServiceProvider.php file
     {
         // $post = Post::findOrFail($id);
         $postid->increment('view_count');       // updating the view count whenever user refresh it.

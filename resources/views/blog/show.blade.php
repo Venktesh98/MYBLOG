@@ -48,7 +48,7 @@
                           </a>
                         </div>
                         
-                        {!! $author->bio_html !!}
+                        {!! $author->bio_html !!} <!-- In Markdown Format -->
                       </div>
                     </div>
                 </article>

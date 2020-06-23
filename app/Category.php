@@ -11,7 +11,7 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
-   
+    
     // public function getCategoryTitleAttribute($value)
     // {
     //     return $this->title;   

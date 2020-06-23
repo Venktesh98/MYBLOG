@@ -21,11 +21,11 @@
                         </div>
                     @endif
 
-                    @foreach ($posts_send as $post)     <!-- foreach loop -->
+                    @foreach ($posts_send as $post)     <!-- foreach loop for displaying the posts -->
                             <article class="post-item">
-                                @if ($post->image_url)
+                                @if ($post->image_url)   <!-- image_url is an alias name of Acessor function -->
                                     <div class="post-item-image">
-                                        <a href="{{ route('blog.show',$post->slug) }}">
+                                        <a href="{{ route('blog.show',$post->slug) }}"> <!-- returns the slug from Post model -->
                                             <img src="{{ $post->image_url }}" alt="">
                                         </a>
                                     </div>

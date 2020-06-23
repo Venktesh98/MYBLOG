@@ -36,7 +36,7 @@ class Post extends Model
         }
         return $imageUrl;
     }
-
+   
     // Accessor function for the thumbnails
     public function getImageThumbUrlAttribute($value)
     {
@@ -74,7 +74,6 @@ class Post extends Model
     {
          return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;  # e is laravel helper function that is used for security purpose.
     }
-
     
     // Scope for fetching the latest post
     public function scopeLatestFirst($query)
