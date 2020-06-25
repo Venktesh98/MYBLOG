@@ -8,7 +8,7 @@ use App\Post;
 
 class BlogController extends BackendController
 {
-    protected $limit = 10;
+    protected $limit = 5;
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +17,8 @@ class BlogController extends BackendController
     public function index()
     {
         $posts = Post::with('author','category')->latest()->paginate($this->limit);
-        // dd($posts);
-        return view('backend.blog.index',compact('posts'));
+        $postCount = Post::count();
+        return view('backend.blog.index',compact('posts','postCount'));
     }
 
     /**
