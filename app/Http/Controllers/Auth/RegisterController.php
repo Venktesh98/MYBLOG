@@ -69,12 +69,12 @@ class RegisterController extends Controller
         // ]);
     }
 
-    public function showRegistrationForm()
+    public function showRegistrationForm()  # overriding the registration method for disabling it
     {
         abort(404);
     }
 
-    public function register(Request $request)
+    public function register(Request $request) # after above have to add the register method
     {
         abort(404);
     }
