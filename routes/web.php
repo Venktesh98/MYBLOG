@@ -27,3 +27,7 @@ Route::get('/category/{category}','BlogController@category')->name('blog.categor
 
 Route::get('/author/{author}','BlogController@author')->name('blog.author');
 
+
+Auth::routes();
+
+Route::get('/home', 'Backend\HomeController@index');
