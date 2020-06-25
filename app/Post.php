@@ -19,6 +19,36 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    // It shows the date according to the format
+    public function dateFormatted($showTimes = false)
+    {
+        $format = "d/m/Y";
+        if($showTimes)
+        {
+            $format = $format . "H:i:s";
+        }
+        return $this->created_at->format($format);
+    }
+
+    // This method displays the date according to the published date
+    public function publicationLabel()
+    {
+        if($this->published_at == NULL)
+        {
+            return '<span class = "label label-warning">Draft</span>';
+        }
+
+        elseif($this->published_at && $this->published_at->isFuture())
+        {
+            return '<span class = "label label-info">Schedule</span>';
+        }
+        
+        else
+        {
+            return '<span class = "label label-success">Published</span>';
+        }
+    }
     
     // Defining the Accesssor function for image attribute over here that is called when model is called 
     public function getImageUrlAttribute($value)
