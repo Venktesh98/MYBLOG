@@ -49,5 +49,7 @@
 <script src="/backend/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/backend/js/app.min.js"></script>
+<!-- contains the margin of pagination of displaying posts in index.blade.php -->
+@yield('script')
 </body>
 </html>
