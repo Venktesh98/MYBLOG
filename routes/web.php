@@ -19,6 +19,8 @@ if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
 //     'as' => 'blog'
 //     ]);
 
+
+
 Route::get('/','BlogController@index');
 
 Route::get('/blog/{postid}', 'BlogController@show')->name('blog.show');
@@ -31,3 +33,7 @@ Route::get('/author/{author}','BlogController@author')->name('blog.author');
 Auth::routes();
 
 Route::get('/home', 'Backend\HomeController@index');
+
+Route::resource('/backend/blog','Backend\BlogController');
+
+
