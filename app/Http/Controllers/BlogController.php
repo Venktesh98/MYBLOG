@@ -38,6 +38,7 @@ class BlogController extends Controller
         // $post = Post::findOrFail($id);
         $postid->increment('view_count');       // updating the view count whenever user refresh it.
         return view('blog.show')->with("posts",$postid);
+        // dd('shoews');
     }   
 
     public function author(User $author)

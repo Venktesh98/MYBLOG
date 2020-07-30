@@ -25,14 +25,14 @@
                             <article class="post-item">
                                 @if ($post->image_url)   <!-- image_url is an alias name of Acessor function -->
                                     <div class="post-item-image">
-                                        <a href="{{ route('blog.show',$post->slug) }}"> <!-- returns the slug from Post model -->
+                                        <a href="{{ route('blog.showblog',$post->slug) }}"> <!-- returns the slug from Post model -->
                                             <img src="{{ $post->image_url }}" alt="">
                                         </a>
                                     </div>
                                 @endif
                                 <div class="post-item-body">
                                     <div class="padding-10">
-                                        <h2><a href="{{ route('blog.show',$post->slug) }}">{{$post->title}}</a></h2>
+                                        <h2><a href="{{ route('blog.showblog',$post->slug) }}">{{$post->title}}</a></h2>
                                         {!! $post->excerpt_html !!}   <!-- called from accessor function from the post model. -->
                                     </div>
                                     
@@ -46,7 +46,7 @@
                                             </ul>
                                         </div>
                                         <div class="pull-right">
-                                            <a href="{{ route('blog.show',$post->slug) }}">Continue Reading &raquo;</a>
+                                            <a href="{{ route('blog.showblog',$post->slug) }}">Continue Reading &raquo;</a>
                                         </div>
                                     </div>
                                 </div>

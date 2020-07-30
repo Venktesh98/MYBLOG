@@ -27,12 +27,18 @@
             <div class="box">
                 <div class="box-header">
                     <div class="pull-left">
-                       <a href="{{ route('blog.create') }}" class = "btn btn-success" >Add New</a>
+                       <a href="{{ route('blog.create') }}" class = "btn btn-info" >Add New</a>
                     </div>
                 </div>
         
               <!-- /.box-header -->
               <div class="box-body ">
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     @if ($posts == NULL)
                         <div class="alert alert-danger">
@@ -59,7 +65,7 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
 
-                                            <a href="route('blog.destroy',$post->id)" class="btn btn-xs btn-danger">
+                                            <a href="{{route('blog.destroy',$post->id)}}" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </td>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+// use App\Http\Requests\PostRequest;
 // use App\Http\Controllers\Controller;
 
 class BlogController extends BackendController
@@ -26,9 +28,10 @@ class BlogController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $posts)
     {
-        dd("This is the create method!!");
+
+        return view('backend.blog.create',compact('posts'));
     }
 
     /**
@@ -37,9 +40,12 @@ class BlogController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\PostRequest $request)
     {
-        //
+        // here user() is to get the current user who makes the request.
+        $request->user()->posts()->create($request->all());   # can also be used $request->only('title') or any any attribute to get.
+
+        return redirect('/backend/blog')->with('success','Your Post was Created Successfully!');
     }
 
     /**
@@ -84,6 +90,9 @@ class BlogController extends BackendController
      */
     public function destroy($id)
     {
-        //
+    //     $post = Post::findOrFail($id);
+    //     $post->delete();
+    //     return redirect('/backend/blog');
+    //     // dd($post);
     }
 }

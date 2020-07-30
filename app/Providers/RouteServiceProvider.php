@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Implemnetation of slug here i.e for passing some text in url instead of simple id
+        // Implementation of slug here i.e for passing some text in url instead of simple id
 
         parent::boot();
 

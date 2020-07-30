@@ -8,6 +8,8 @@ use Carbon\Carbon;                              # for date and time had use the 
 
 class Post extends Model
 {
+    protected $fillable = ['title','slug','excerpt','body','published_at','category_id'];
+
     protected $dates = ['published_at'];
 
     public function author()
@@ -18,6 +20,12 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    // mutator invoked when the published_at is Null 
+    public function setPublishedAtAttribute($value)
+    {
+        $this->attributes['published_at'] = $value ? : NULL;
     }
 
     // It shows the date according to the format

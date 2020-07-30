@@ -23,7 +23,7 @@ if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
 
 Route::get('/','BlogController@index');
 
-Route::get('/blog/{postid}', 'BlogController@show')->name('blog.show');
+Route::get('/blog/{postid}', 'BlogController@show')->name('blog.showblog');
 
 Route::get('/category/{category}','BlogController@category')->name('blog.category');
 
