@@ -9,6 +9,7 @@
         "andreasindal/laravel-markdown": "1.1",
         "doctrine/dbal": "^2.10",
         "graham-campbell/markdown": "8.1",
+        "intervention/image": "^2.5",
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "5.3.0"
     },
