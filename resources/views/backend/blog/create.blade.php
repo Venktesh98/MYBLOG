@@ -17,7 +17,7 @@
         <li>
             <a href="{{route('blog.index')}}">Blog</a>
         </li>
-        <li class="active">All Posts</li>
+        <li class="active">Add New</li>
       </ol>
     </section>
     
@@ -52,16 +52,12 @@
                         @endif
                     </div>
 
-                    <div class="form-group {{ $errors->has('excerpt') ? 'has-error' : '' }}">
+                    <div class="form-group excerpt">
                         {!! Form::label('excerpt') !!}
                         {!! Form::textarea('excerpt',null,['class'=>'form-control']) !!}
-
-                        @if ($errors->has('excerpt'))
-                            <span class='help-block'>{{ $errors->first('excerpt') }}</span>
-                        @endif
                     </div>
 
-                    <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
+                    <div class="form-group body {{ $errors->has('body') ? 'has-error' : '' }}">
                         {!! Form::label('body') !!}
                         {!! Form::textarea('body',null,['class'=>'form-control']) !!}
 
@@ -119,6 +115,22 @@
 @section('script')
     <script type = text/javascript>
         $('ul.pagination').addClass('no-margin pagination-sm');
+
+      // Javascript code for adding the slug automatically based on the Title
+        $('#title').on('blur', function() {
+            var theTitle = this.value.toLowerCase().trim(),
+                slugInput = $('#slug'),
+                theSlug = theTitle.replace(/&/g, '-and-')           // if contains & replace the slug with and
+                                  .replace(/[^a-z0-9-]+/g, '-')    // if contains alphanumeric characters replace slug with -
+                                  .replace(/\-\-+/g, '-')         // eliminate double -- with single -
+                                  .replace(/^-+|-+$/g, '');       // if contains left and right side +,- replace with null in slug
+
+            slugInput.val(theSlug);
+        });
+
+        var simplemde1 = new SimpleMDE({ element: $("#excerpt")[0] });;
+        var simplemde2 = new SimpleMDE({ element: $("#body")[0] });
+
     </script>
 @endsection
 
