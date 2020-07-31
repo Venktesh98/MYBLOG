@@ -114,12 +114,12 @@ class Post extends Model
     }
     
     // Scope for fetching the latest post
-    public function scopeLatestFirst($query)
+    public function scopeLatestFirst($query)    # This will be used in the Blogcontroller.php 
     {
         return $query->orderBy('published_at','desc');
     }
 
-    public function scopePopular($query)
+    public function scopePopular($query)    # This will invokes the View/Composer/NavigationComposer.php
     {
         return $query->orderBy('view_count','desc');
     }
