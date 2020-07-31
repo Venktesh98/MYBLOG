@@ -1,0 +1,9 @@
+.form-group.excerpt .CodeMirror{
+    height: 130px;
+    min-height: 130px;
+}
+
+.form-group.body .CodeMirror{
+    height: 300px;
+    min-height: 300px;
+}
