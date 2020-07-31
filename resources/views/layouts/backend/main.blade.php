@@ -17,8 +17,11 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/backend/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="/backend/plugins/simplemde/simplemde.min.css">
-  <link rel="stylesheet" href="/backend/css/custom.css">
+  <link rel="stylesheet" href="/backend/plugins/simplemde/simplemde.min.css">  <!-- css for body and excerpt -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css"> <!-- css for datetimepicker -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">   <!-- icons for datetimepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css"> <!-- css for file upload -->
+  <link rel="stylesheet" href="/backend/css/custom.css"> <!-- contains the custom css for the body & excerpt -->
 
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
@@ -50,7 +53,11 @@
 <script src="/backend/js/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="/backend/js/bootstrap.min.js"></script>
-<script src="/backend/plugins/simplemde/simplemde.min.js"></script>
+<script src="/backend/plugins/simplemde/simplemde.min.js"></script>   <!-- contains markdown file for body and excerpt in FORM -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script> <!-- moment js for datetimepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> <!-- for datetimepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.js"></script>    <!-- for file upload -->
+
 <!-- AdminLTE App -->
 <script src="/backend/js/app.min.js"></script>
 

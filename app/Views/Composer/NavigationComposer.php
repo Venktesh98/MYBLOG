@@ -24,7 +24,7 @@ class NavigationComposer
 
     private function composePopularposts(View $view)
     {
-        $popular_posts = Post::latestFirst()->popular()->take(3)->get();
+        $popular_posts = Post::latestFirst()->popular()->take(4)->get();
         $view->with('popularposts',$popular_posts);
     }   
 }

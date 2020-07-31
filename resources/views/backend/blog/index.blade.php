@@ -27,7 +27,7 @@
             <div class="box">
                 <div class="box-header">
                     <div class="pull-left">
-                       <a href="{{ route('blog.create') }}" class = "btn btn-info" >Add New</a>
+                       <a href="{{ route('blog.create') }}" class = "btn btn-success" ><i class="fa fa-plus"></i> Add New</a>
                     </div>
                 </div>
         
@@ -57,7 +57,7 @@
                                     <td>Title</td>
                                     <td width = "100">Author</td>
                                     <td width = "160">Category</td>
-                                    <td width = "160">Date</td>
+                                    <td width = "180">Date</td>
                                 </tr>
                             </thead>
                             <tbody>

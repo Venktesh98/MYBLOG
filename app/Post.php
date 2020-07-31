@@ -97,8 +97,8 @@ class Post extends Model
     // Accessor Function for date attribute
     public function getDateAttribute($value)
     {
-        // return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();     # will creats the date for human readble form.
-        return is_null($this->created_at) ? '' : $this->created_at->diffForHumans();
+        return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();     # will creats the date for human readble form.
+        // return is_null($this->created_at) ? '' : $this->created_at->diffForHumans();
     }
 
     // Accessor Function for getting the html attribute for body

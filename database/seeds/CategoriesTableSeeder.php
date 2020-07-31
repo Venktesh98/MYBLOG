@@ -20,7 +20,7 @@ class CategoriesTableSeeder extends Seeder
             ],
             [
                 'title' => 'Web Programming',
-                'slug' => 'web-web-programming'
+                'slug' => 'web-programming'
             ],
             [
                 'title' => 'Internet',

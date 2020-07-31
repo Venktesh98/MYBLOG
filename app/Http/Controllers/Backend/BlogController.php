@@ -31,7 +31,8 @@ class BlogController extends BackendController
     public function index()
     {
         $posts = Post::with('author','category')->latest()->paginate($this->limit);
-        $postCount = Post::count();
+        $postCount = Post::count();   # counts all the items 
+        // $postCount = $this->limit; # counts only the items that are on the page.
         return view('backend.blog.index',compact('posts','postCount'));
     }
 
