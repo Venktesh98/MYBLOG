@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Post;
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 // use App\Http\Requests\PostRequest;
 // use App\Http\Controllers\Controller;
 
@@ -23,7 +24,8 @@ class BlogController extends BackendController
     {
         parent::__construct();   # for adding the middleware
 
-        $this->uploadPath =  public_path('img');
+        // $this->uploadPath =  public_path('img');    # gets the path of the img directory of the public folder
+        $this->uploadPath =  public_path(config('cms.image.directory'));
     }
 
     public function index()
@@ -57,6 +59,7 @@ class BlogController extends BackendController
         // here user() is to get the current user who makes the request.
         $request->user()->posts()->create($data);   # can also be used $request->only('title') or any any attribute to get.
 
+        # Can also be done by this way
         // $post = new Post;
         // $post->title = request('title');
         // $post->slug = request('slug');
@@ -83,11 +86,30 @@ class BlogController extends BackendController
             // gets the image fileName
             $fileName = $image->getClientOriginalName();
 
-            // destination of the image
+            // destination of the image i.e the img directory of public folder
             $destination = $this->uploadPath;
 
             // moves the image to the sepecified destination
-            $image->move($destination,$fileName);
+            $succesfullyUpload = $image->move($destination,$fileName);
+
+            if($succesfullyUpload)
+            {
+                // gets the width and height of the image from the config/cms.php
+                $width = config('cms.image.thumbnail.width');
+                $height = config('cms.image.thumbnail.height');
+
+                // gets the file extension
+                $extension = $image->getClientOriginalExtension();
+
+                // replaces extension with _thumb.extension of original filename.
+                $thumbnail = str_replace(".{$extension}","_thumb.{$extension}",$fileName);
+
+                // saves the image thumbnail in img directory
+                Image::make($destination.'/'.$fileName)
+                                    // ->resize(250,170)
+                                    ->resize($width,$height)
+                                    ->save($destination.'/'.$thumbnail);
+            }
 
             // stores the image name in the database
             $data['image'] = $fileName;
