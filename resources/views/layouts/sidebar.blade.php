@@ -35,10 +35,10 @@
                 <ul class="popular-posts">
                     @foreach ($popularposts as $post)
                         <li>
-                            @if ($post->image_thumb_url)
+                            @if ($post->image_thumb_url)     <!-- image_thumb_url is a Accessor function from Post model -->
                                 <div class="post-image">
                                     <a href="{{ route('blog.showblog',$post->slug) }}">
-                                        <img src="{{ $post->image_thumb_url }}" />
+                                        <img src="{{ $post->image_thumb_url }}" />    <!-- image_thumb_url is a Accessor function Post model-->
                                     </a>
                                 </div>
                             @endif
