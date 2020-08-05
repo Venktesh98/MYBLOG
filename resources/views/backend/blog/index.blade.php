@@ -34,15 +34,7 @@
               <!-- /.box-header -->
               <div class="box-body ">
 
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                        </div>
-                    @endif
-
+                   @include('backend.blog.message')
                     @if ($posts == NULL)
                         <div class="alert alert-danger">
                             <strong>No Record Found </strong>
@@ -64,13 +56,14 @@
                                 @foreach ($posts as $post)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('blog.edit',$post->id) }}" class="btn btn-xs btn-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-
-                                            <a href="{{route('blog.destroy',$post->id)}}" class="btn btn-xs btn-danger">
-                                                <i class="fa fa-times"></i>
-                                            </a>
+                                            {!! Form::open(['method' => 'delete','route' => ['blog.destroy',$post->id ]]) !!}
+                                                <a href="{{ route('blog.edit',$post->id) }}" class="btn btn-xs btn-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <button type="submit" class="btn btn-xs btn-danger">                                        
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            {!! Form::close() !!}
                                         </td>
                                         <td>{{$post->title}}</td>
                                         <td>{{$post->author->name}}</td>
