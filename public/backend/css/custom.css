@@ -7,3 +7,7 @@
     height: 300px;
     min-height: 300px;
 }
+
+a.selected-status{
+    font-weight: bold;
+}
