@@ -2,12 +2,16 @@
 
 namespace App;
 
-use GrahamCampbell\Markdown\Facades\Markdown;   # for Markdown i.e for html presentation of contents on the blog
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;                              # for date and time had use the carbon api.
+use GrahamCampbell\Markdown\Facades\Markdown;   # for Markdown i.e for html presentation of contents on the blog
 
 class Post extends Model
 {
+    // This is used to moving the deleted post to the trash called as trait.
+    use SoftDeletes;   
+
     protected $fillable = ['title','slug','excerpt','body','published_at','category_id','image'];
 
     protected $dates = ['published_at'];
@@ -128,5 +132,4 @@ class Post extends Model
     // {
     //     return $query->where("published_at","<=",Carbon::now());   # not working coz of php version might be
     // } 
-
 }
