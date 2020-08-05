@@ -71,7 +71,7 @@ class BlogController extends BackendController
         // $post->author_id = auth()->user()->id;
 
         // $post->save();
-        return redirect('/backend/blog')->with('success','Your Post was Created Successfully!');
+        return redirect('/backend/blog')->with('message','Your Post has been Created Successfully!');
     }
 
     // used for handling the request for image uploading
@@ -155,7 +155,7 @@ class BlogController extends BackendController
         $data = $this->handleRequest($request);
         $post->update($data);    # updates in the DB.
 
-        return redirect('/backend/blog')->with('success','Your Post was Updated Successfully!');
+        return redirect('/backend/blog')->with('message','Your Post was Updated Successfully!');
     }
 
     /**
@@ -166,9 +166,17 @@ class BlogController extends BackendController
      */
     public function destroy($id)
     {
-    //     $post = Post::findOrFail($id);
-    //     $post->delete();
-    //     return redirect('/backend/blog');
-    //     // dd($post);
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/backend/blog')->with('trash-message',['Your Post moved to Trash',$id]);
+        // dd($post);
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->restore();
+
+        return redirect('/backend/blog')->with('message','Your Post has been removed from Trash!');
     }
 }
