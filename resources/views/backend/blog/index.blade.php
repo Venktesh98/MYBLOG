@@ -29,53 +29,28 @@
                     <div class="pull-left">
                        <a href="{{ route('blog.create') }}" class = "btn btn-success" ><i class="fa fa-plus"></i> Add New</a>
                     </div>
+
+                    <div class="pull-right" style="padding: 7px 0;">
+                        <a href="?status=all">All</a> |
+                        <a href="?status=trash">Trash</a>
+                    </div>
                 </div>
         
               <!-- /.box-header -->
               <div class="box-body ">
-
                    @include('backend.blog.message')
-                    @if ($posts == NULL)
+
+                    @if ( !$posts->count())
                         <div class="alert alert-danger">
                             <strong>No Record Found </strong>
                         </div>
     
                     @else
-                    
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td width="80">Action</td>
-                                    <td>Title</td>
-                                    <td width = "100">Author</td>
-                                    <td width = "160">Category</td>
-                                    <td width = "180">Date</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($posts as $post)
-                                    <tr>
-                                        <td>
-                                            {!! Form::open(['method' => 'delete','route' => ['blog.destroy',$post->id ]]) !!}
-                                                <a href="{{ route('blog.edit',$post->id) }}" class="btn btn-xs btn-primary">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <button type="submit" class="btn btn-xs btn-danger">                                        
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            {!! Form::close() !!}
-                                        </td>
-                                        <td>{{$post->title}}</td>
-                                        <td>{{$post->author->name}}</td>
-                                        <td>{{$post->category->title}}</td>
-                                        <td>
-                                            <abbr title="$post->dateFormatted(true)">{{$post->dateFormatted()}}</abbr> |
-                                            {!! $post->publicationLabel() !!}   <!-- Shows the date from the Post model -->
-                                        </td> 
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        @if ($onlyTrashed)
+                            @include('backend.blog.table-trash')
+                        @else
+                            @include('backend.blog.table-allposts')
+                        @endif
                     @endif
               </div>
               <!-- /.box-body -->
@@ -88,7 +63,7 @@
                             <li><a href = "#">3</a></li>
                             <li><a href = "#">&raquo;</a></li>
                         </ul> --}}
-                        {{ $posts->render() }}                                  <!-- for pagination -->
+                        {{ $posts->links() }}                                  <!-- for pagination -->
                     </div>
                     
                     <div class="pull-right">                                    <!-- displays the total number of post -->
