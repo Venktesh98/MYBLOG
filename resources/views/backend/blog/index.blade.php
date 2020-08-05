@@ -5,10 +5,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Blogs
-        <small> <strong> Display all blog posts </strong> </small>
-      </h1>
+
+       @include('backend.blog.statusLabel')        <!-- includes the Labels of the Blog Post according to the publicaton -->
+
       <ol class="breadcrumb">
         <li>
             <a href="/home"><i class="fa fa-dashboard"></i> Dashboard</a>
@@ -31,8 +30,14 @@
                     </div>
 
                     <div class="pull-right" style="padding: 7px 0;">
-                        <a href="?status=all">All</a> |
-                        <a href="?status=trash">Trash</a>
+                        <?php $links = [] ?>
+                        @foreach ($statusList as $key => $value)     <!-- for displaying all the posts with respect to the numbers -->
+                            @if ($value)
+                                <?php $selected = Request::get('status') == $key ? 'selected-status' : NULL ?>
+                                <?php $links[] = "<a class = \"{$selected}\" href=\"?status={$key}\">"  .ucwords($key) ."({$value}) </a>" ?>
+                            @endif
+                        @endforeach
+                        {!! implode(' | ' ,$links) !!}        <!-- for separating according to the | -->
                     </div>
                 </div>
         
@@ -46,7 +51,7 @@
                         </div>
     
                     @else
-                        @if ($onlyTrashed)
+                        @if ($onlyTrashed)                          <!-- if TRUE then only displays -->
                             @include('backend.blog.table-trash')
                         @else
                             @include('backend.blog.table-allposts')
@@ -63,7 +68,7 @@
                             <li><a href = "#">3</a></li>
                             <li><a href = "#">&raquo;</a></li>
                         </ul> --}}
-                        {{ $posts->links() }}                                  <!-- for pagination -->
+                        {{ $posts->appends(request()->query())->links() }}               <!-- for pagination -->
                     </div>
                     
                     <div class="pull-right">                                    <!-- displays the total number of post -->
