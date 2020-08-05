@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use config;
 use App\Post;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -30,22 +31,55 @@ class BlogController extends BackendController
 
     public function index(Request $request)
     {
+        $onlyTrashed = FALSE;          # by default posts are null
+
         // only shows the items that are in the trash using onlyTrashed()
         if(($status = $request->input('status')) && $status == 'trash')
         {
             $posts = Post::onlyTrashed()->with('author','category')->latest()->paginate($this->limit);
             $postCount = Post::onlyTrashed()->count(); 
-            $onlyTrashed = TRUE;  # flag for showing the trash items 
+            $onlyTrashed = TRUE;  # flag for showing the trash posts 
         }
+
+        elseif($status == 'published')
+        {
+            $posts = Post::published()->with('author','category')->latest()->paginate($this->limit);
+            $postCount = Post::published()->count();   # counts all the published posts  
+        }
+
+        elseif($status == 'scheduled')
+        {
+            $posts = Post::scheduled()->with('author','category')->latest()->paginate($this->limit);
+            $postCount = Post::scheduled()->count();   # counts all the scheduled posts  
+        }
+
+        elseif($status == 'draft')
+        {
+            $posts = Post::draft()->with('author','category')->latest()->paginate($this->limit);
+            $postCount = Post::draft()->count();   # counts all the draft posts  
+        }
+
         else
         {
             $posts = Post::with('author','category')->latest()->paginate($this->limit);
-            $postCount = Post::count();   # counts all the items 
-            $onlyTrashed = FALSE;
+            $postCount = Post::count();   # counts all the posts  
         }
         
-        // $postCount = $this->limit; # counts only the items that are on the page.
-        return view('backend.blog.index',compact('posts','postCount','onlyTrashed'));
+        $statusList = $this->statusList();
+        // $postCount = $this->limit; # counts only the posts that are on the page.
+        return view('backend.blog.index',compact('posts','postCount','onlyTrashed','statusList'));
+    }
+
+    // returns the number of posts according to the publication below
+    private function statusList()
+    {
+        return [
+            'all' => Post::count(),
+            'published' => Post::published()->count(),
+            'scheduled' => Post::scheduled()->count(),
+            'draft' => Post::draft()->count(),
+            'trash' => Post::onlyTrashed()->count(),
+        ];
     }
 
     /**
@@ -164,8 +198,14 @@ class BlogController extends BackendController
     public function update(Requests\PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
+        $oldImage  = $post->image;
         $data = $this->handleRequest($request);
-        $post->update($data);    # updates in the DB.
+        $post->update($data);                                   # updates in the DB.
+
+        if($oldImage!= $post->image)
+        {
+            $this->removeImage($oldImage);                      # removes the old Image from the server
+        }
 
         return redirect('/backend/blog')->with('message','Your Post was Updated Successfully!');
     }
@@ -189,14 +229,39 @@ class BlogController extends BackendController
         $post = Post::withTrashed()->findOrFail($id);
         $post->restore();
 
-        return redirect('/backend/blog')->with('message','Your Post has been removed from Trash!');
+        return redirect()->back()->with('message','Your Post has been restored from Trash!');
     }
 
     // will forcefully deletes the post.
     public function forceDestroy($id)
     {
-        $post = Post::onlyTrashed()->findOrfail($id)->forceDelete();
+        $post = Post::onlyTrashed()->findOrfail($id); 
+        $post->forceDelete();
 
+        $this->removeImage($post->image);                   # removes the image from the database
+    
         return redirect('backend/blog?status=trash')->with('message','Your Post has been Deleted Successfully!');
+    }
+
+    // used for removing the image permanently from the server.
+    private function removeImage($image)
+    {
+        if(!empty($image))
+        {
+            $imagePath = $this->uploadPath .'/'. $image;                    # gets the image
+            $ext = substr(strchr($image,'.'),1);                            # gets the extension of the image
+            $thumbnail = str_replace(".{$ext}","_thumb.{$ext}",$image);     # gets the thumbnail
+            $thumbnailPath = $this->uploadPath .'/'. $thumbnail;            # gets the thumbnail image.
+            
+            if(file_exists($imagePath))
+            {
+                unlink($imagePath);     # removes the image from the /public/img/ directory
+            }
+
+            if(file_exists($thumbnailPath))
+            {
+                unlink($thumbnailPath);     # removes the image from the /public/img/ directory
+            }
+        }
     }
 }
