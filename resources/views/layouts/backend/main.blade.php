@@ -45,7 +45,6 @@
 
   <!-- /.content-wrapper -->
   @include('layouts.backend.footer')
-
 </div>
 <!-- ./wrapper -->
 
