@@ -37,7 +37,8 @@
         </div>
       <!-- ./row -->
     </section>
-    <!-- /.content -->  
+    <!-- /.content --> 
+  </div>
 @endsection
 
 @include('backend.blog.script')         <!-- includes the all javascript code -->
