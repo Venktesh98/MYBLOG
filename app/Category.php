@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    protected $fillable = ['title','slug'];
+
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -21,8 +23,13 @@ class Category extends Model
     // {
     //     return $this->slug;
     // }
+    
+    // public function scopecategoryOrder($query)
+    // {
+    //     return $query->orderBy('title');
+    // }
 
-    public function getRouteKeyName()   # called as binding with url
+    public function getRouteKeyName()   # called as binding with url i.e comes from app/Providers/RouteServiceProvider.php
     {
         return 'slug';
     }
