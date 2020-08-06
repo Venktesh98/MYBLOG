@@ -3,6 +3,7 @@
 if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 }
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,8 @@ Auth::routes();
 Route::get('/home', 'Backend\HomeController@index');
 
 Route::resource('/backend/blog','Backend\BlogController');
+
+Route::resource('/backend/categories','Backend\CategoriesController');
 
 Route::put('backend/blog/restore/{blog}','Backend\BlogController@restore')->name('backend.blog.restore');
 
