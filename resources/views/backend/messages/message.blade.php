@@ -14,6 +14,14 @@
     </button>
 </div>
 
+@elseif (session('error-message-loginuser'))
+<div class="alert alert-danger" role="alert">
+    {{ session('error-message-loginuser') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
 @elseif(session('trash-message'))
     <?php list($message,$postId) = session('trash-message') ?>
     {!! Form::open(['method'=>'PUT', 'route'=>['backend.blog.restore',$postId]]) !!}

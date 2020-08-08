@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-<title> MyBlog | BLOG Category index </title>
+<title> MyBlog | Category index </title>
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
