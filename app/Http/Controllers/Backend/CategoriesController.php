@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Post;
 use App\Category;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -69,7 +70,9 @@ class CategoriesController extends BackendController
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        
+        return view('backend.categories.edit',compact('category'));
     }
 
     /**
@@ -79,9 +82,21 @@ class CategoriesController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\CategoryUpdateRequest $request, $id)
     {
-        //
+        # First Method
+
+        // $category = Category::findOrFail($id);
+
+        // $category->title = $request->input('title');
+        // $category->slug = $request->input('slug');
+        // // $category->update();
+        // $category->save();
+
+        #second Method
+        Category::findOrFail($id)->update($request->all()); 
+
+        return redirect('/backend/categories')->with('message','Your Category Updated Successfully!');
     }
 
     /**
@@ -90,8 +105,12 @@ class CategoriesController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requests\CategoryDestroyRequest $request, $id)
     {
-        //
+        Post::withTrashed()->where('category_id',$id)->update(['category_id' => config('cms.default_category_id')]);
+        $category = Category::findOrFail($id);
+        $category->delete(); 
+
+        return redirect('/backend/categories')->with('message','Your Category deleted Successfully!');
     }
 }
