@@ -13,7 +13,7 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,11 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->method());
+        // contains the unique categories of all except the one that is being edited i.e it ignores the unique validation of current category being edited
         return [
-            //
+            'title' => 'required|max:255|unique:categories,title,'. $this->route('category'),
+            'slug'  => 'required|max:255|unique:categories,slug,'. $this->route('category')
         ];
     }
 }
