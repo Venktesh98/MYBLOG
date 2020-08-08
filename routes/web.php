@@ -39,9 +39,12 @@ Route::resource('/backend/blog','Backend\BlogController');
 
 Route::resource('/backend/categories','Backend\CategoriesController');
 
+Route::resource('/backend/users','Backend\UsersController');
+
+Route::get('/backend/users/confirm/{users}','Backend\UsersController@confirm')->name('users.confirm');
+
 Route::put('backend/blog/restore/{blog}','Backend\BlogController@restore')->name('backend.blog.restore');
 
 Route::delete('backend/blog/force-destroy/{blog}','Backend\BlogController@forceDestroy')->name('backend.blog.force-destroy');
-
 
 
