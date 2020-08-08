@@ -97,7 +97,7 @@ class UsersController extends BackendController
         $selectedUser = $request->input('selected_user');
 
         if($deleteOption == 'delete'){
-            // deletes all user posts from trash.
+            // deletes all user posts from index page and also from trash.
             $user->posts()->withTrashed()->forceDelete();            
         }
 
