@@ -60,22 +60,24 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
+
+    //  To disable the register route comment inside stuff and uncomment the below methods.
     protected function create(array $data)
     {
-        // return User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        // ]);
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
 
-    public function showRegistrationForm()  # overriding the registration method for disabling it
-    {
-        abort(404);
-    }
+    // public function showRegistrationForm()  # overriding the registration method for disabling it
+    // {
+    //     abort(404);
+    // }
 
-    public function register(Request $request) # after above have to add the register method
-    {
-        abort(404);
-    }
+    // public function register(Request $request) # after above have to add the register method
+    // {
+    //     abort(404);
+    // }
 }

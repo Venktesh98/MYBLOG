@@ -37,7 +37,7 @@ class PostRequest extends FormRequest
         switch($this->method()){
             case 'PUT':
             case 'PATCH':
-                $rules['slug']  ='required|unique:posts,slug,'. $this->route('blog');    # returns the current post id that is being edited
+                $rules['slug']  ='required|unique:posts,slug,'. $this->route('blog');    # returns the current post id that is being edited and that is ignored
                 break;
         }
 
