@@ -64,4 +64,12 @@ class User extends Authenticatable
         return $this->bio ? Markdown::convertToHtml(e($this->bio)) : NULL;  # e is laravel helper function that is used for security purpose.
     }
 
+    // Mutator for setting the hash passsword.
+    public function setPasswordAttribute($value)
+    {
+        if(!empty($value)) 
+        {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
 }
