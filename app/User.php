@@ -2,12 +2,15 @@
 
 namespace App;
 
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Notifications\Notifiable;
+use Laratrust\Traits\LaratrustUserTrait;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
-{
+{   
+    use LaratrustUserTrait;    # this trait is used to create the relationship with Role and Permission models
+    
     protected $table = users;
     use Notifiable;
 
