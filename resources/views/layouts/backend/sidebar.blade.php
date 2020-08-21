@@ -30,11 +30,19 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('blog.index') }}"><i class="fa fa-circle-o"></i> All Posts</a></li>
-          <li><a href="{{ route('blog.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+            <li><a href="{{ route('blog.create') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
           </ul>
         </li>
-        <li><a href="{{ route('categories.index') }}"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
-        <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+
+        {{-- Shows according to the roles i.e admin and editor --}}
+        @role(['admin','editor'])
+            <li><a href="{{ route('categories.index') }}"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
+        @endrole
+
+        @role('admin')
+            <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+        @endrole
+
       </ul>
     </section>
     <!-- /.sidebar -->
