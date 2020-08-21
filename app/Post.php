@@ -26,7 +26,7 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // mutator invoked when the published_at is Null 
+    // mutator invoked when the published_at contains Null value
     public function setPublishedAtAttribute($value)
     {
         $this->attributes['published_at'] = $value ? : NULL;
