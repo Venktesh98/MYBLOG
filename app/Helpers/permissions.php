@@ -41,7 +41,7 @@ use App\Post;
 
         foreach($crudPermissionMaps as $permission => $methods)
         {  
-            // if the current method exists in the current method list
+            // if the current method exists in the current method list 
             // we will check the permission
             if(in_array($method,$methods) && isset($crudClassesMaps[$controller]))
             {
