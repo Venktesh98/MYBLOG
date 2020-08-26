@@ -34,6 +34,8 @@ Route::get('/author/{author}','BlogController@author')->name('blog.author');
 Auth::routes();
 
 Route::get('/home', 'Backend\HomeController@index');
+Route::get('/edit-profile' ,'Backend\HomeController@edit');
+Route::put('/edit-profile' ,'Backend\HomeController@update');
 
 Route::resource('/backend/blog','Backend\BlogController');
 
