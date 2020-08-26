@@ -58,21 +58,28 @@ class BlogController extends BackendController
             $postCount = Post::draft()->count();   # counts all the draft posts  
         }
 
+        elseif($status == 'own')
+        {
+            $posts = $request->user()->posts()->with('author','category')->latest()->paginate($this->limit);
+            $postCount = $request->user()->posts()->count();   # counts all the draft posts  
+        }
+ 
         else
         {
             $posts = Post::with('author','category')->latest()->paginate($this->limit);
             $postCount = Post::count();   # counts all the posts  
         }
         
-        $statusList = $this->statusList();
+        $statusList = $this->statusList($request);
         // $postCount = $this->limit; # counts only the posts that are on the page.
         return view('backend.blog.index',compact('posts','postCount','onlyTrashed','statusList'));
     }
 
     // returns the number of posts according to the publication below
-    private function statusList()
+    private function statusList($request)
     {
         return [
+            'own' => $request->user()->posts()->count(),
             'all' => Post::count(),
             'published' => Post::published()->count(),
             'scheduled' => Post::scheduled()->count(),
