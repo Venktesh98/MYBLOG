@@ -9,21 +9,36 @@
         </tr>
     </thead>
     <tbody>
+        <?php $request = request() ?>
         @foreach ($posts as $post)
             <tr>
                 <td>
                     {{-- For restoring the posts from trash --}}
                     {!! Form::open(['style' => 'display:inline-block;' ,'method' => 'PUT','route' => ['backend.blog.restore',$post->id ]]) !!}
+                        
+                    @if (check_user_permissions($request,"Blog@restore",$post->id))
                         <button title = "Restore" type="submit" class="btn btn-xs btn-primary">
                             <i class="fa fa-refresh"></i>
                         </button>
+                    @else
+                        <button title = "Restore" onclick="return false;" type="submit" class="btn btn-xs btn-primary disabled">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    @endif
+            
                     {!! Form::close() !!}
                     
                     {{-- for deleting the posts permanently from Trash --}}
                     {!! Form::open(['style' => 'display:inline-block;',     'method' => 'delete','route' => ['backend.blog.force-destroy',$post->id ]]) !!}
+                    @if (check_user_permissions($request,"Blog@forceDestroy",$post->id))
                         <button title = "Delete Permanently" onclick= "return confirm('You are about to delete post permanently. Are you sure?')" type="submit" class="btn btn-xs btn-danger">                                        
                             <i class="fa fa-times"></i>
                         </button>
+                    @else
+                        <button title = "Delete Permanently" onclick="return false;" type="submit" class="btn btn-xs btn-danger disabled">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    @endif
                     {!! Form::close() !!}
                 </td>
                 <td>{{$post->title}}</td>

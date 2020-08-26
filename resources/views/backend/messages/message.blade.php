@@ -33,4 +33,12 @@
             <button type="submit" class = "btn btn-sm btn-warning"><i class = "fa fa-undo"></i> Undo</button>
         </div>
     {!! Form::close() !!}
+
+@elseif (session('message-temp'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('message-temp') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 @endif

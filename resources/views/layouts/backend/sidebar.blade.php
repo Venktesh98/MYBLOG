@@ -35,14 +35,17 @@
         </li>
 
         {{-- Shows according to the roles i.e admin and editor --}}
-        @role(['admin','editor'])
-            <li><a href="{{ route('categories.index') }}"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
-        @endrole
+        {{-- @role(['admin','editor'])  --}}
+        @if (check_user_permissions(request(),"Categories@index",))
+            <li><a href="{{ route('categories.index') }}"><i class="fa fa-folder"></i> <span>Categories</span></a></li>  
+        @endif
+        {{-- @endrole --}}
 
-        @role('admin')
+        {{-- @role('admin') --}}
+        @if (check_user_permissions(request(),"Users@index",))
             <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
-        @endrole
-
+        @endif
+        {{-- @endrole --}}
       </ul>
     </section>
     <!-- /.sidebar -->

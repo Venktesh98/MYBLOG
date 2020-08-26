@@ -9,17 +9,35 @@
         </tr>
     </thead>
     <tbody>
+        <?php $request = request() ?>    <!-- request varaible -->
+         
         @foreach ($posts as $post)
             <tr>
                 <td>
-                    {{-- Puts the posts into the Trash --}}
-                    {!! Form::open(['method' => 'delete','route' => ['blog.destroy',$post->id ]]) !!}
-                        <a href="{{ route('blog.edit',$post->id) }}" class="btn btn-xs btn-primary">  <!-- edits the post -->
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <button type="submit" class="btn btn-xs btn-danger">                                        
-                            <i class="fa fa-trash"></i>
-                        </button>
+                    {!! Form::open(['method' => 'delete','route' => ['blog.destroy',$post->id ]]) !!}  {{-- Puts the posts into the Trash --}}
+                        
+                        @if (check_user_permissions($request,'Blog@edit',$post->id))
+                            <a href="{{ route('blog.edit',$post->id) }}" class="btn btn-xs btn-primary">  <!-- edits the post -->
+                                <i class="fa fa-edit"></i>
+                            </a> 
+                        
+                        @else
+                            <a class="btn btn-xs btn-primary disabled">  <!-- disables the edit button -->
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endif
+                        
+                        @if (check_user_permissions($request,'Blog@destroy',$post->id))
+                            <button type="submit" class="btn btn-xs btn-danger">                                        
+                                <i class="fa fa-trash"></i>
+                            </button>
+                            
+                        @else
+                            <button type="button" onclick="return false;" class="btn btn-xs btn-danger disabled">  <!-- disables the delete button -->                                    
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        @endif
+
                     {!! Form::close() !!}
                 </td>
                 <td>{{$post->title}}</td>
