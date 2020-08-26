@@ -32,8 +32,8 @@
                     <div class="pull-right" style="padding: 7px 0;">
                         <?php $links = [] ?>
                         @foreach ($statusList as $key => $value)     <!-- for displaying all the posts with respect to the numbers -->
-                            @if ($value)
-                                <?php $selected = Request::get('status') == $key ? 'selected-status' : NULL ?>
+                        @if ($value)
+                                <?php $selected = Request::get('status') == $key ? 'selected-status' : NULL ?>   <!-- selected-status used for making bold in custom.css -->
                                 <?php $links[] = "<a class = \"{$selected}\" href=\"?status={$key}\">"  .ucwords($key) ."({$value}) </a>" ?>
                             @endif
                         @endforeach
