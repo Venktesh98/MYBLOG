@@ -9,10 +9,10 @@ use GrahamCampbell\Markdown\Facades\Markdown;   # for Markdown i.e for html pres
 
 class Post extends Model
 {
-    // This is used to moving the deleted post to the trash called as trait.
-    use SoftDeletes;   
+    
+    use SoftDeletes;   // This is used to moving the deleted post to the trash called as trait.
 
-    protected $fillable = ['title','slug','excerpt','body','published_at','category_id','image'];
+    protected $fillable = ['title','slug','excerpt','body','published_at','category_id','image'];   // for not occuring the mass assignment error
 
     protected $dates = ['published_at'];
 
