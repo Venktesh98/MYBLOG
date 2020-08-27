@@ -9,14 +9,20 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    protected $limit = 3;
     
-    public function index()
+    public function index(Request $request)
     { 
         // $post = Post::all();
         // \DB::enableQueryLog();    # for debugging the database query
 
         $this->limit = 3;
-        $post = Post::with('author')->latestFirst()->paginate($this->limit);
+        $post = Post::with('author')
+                    ->latestFirst()
+                    ->published()
+                    ->search($request->input('term'))
+                    ->paginate($this->limit);
+ 
         return view('blog.index')->with('posts_send',$post);   # remove return and add render() at last in view statement for DB query
         
         // dd("blog msg");
