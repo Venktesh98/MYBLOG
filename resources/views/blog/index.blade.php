@@ -5,22 +5,12 @@
         <div class="row">
             <div class="col-md-8">
                 @if ($posts_send->count() == NULL)
-                <div class="alert alert-warning">
-                    <p> Nothing Found </p>
-                </div>
+                    <div class="alert alert-warning">
+                        <p> Nothing Found </p>
+                    </div>
                 @else
-                    @if($categoryName)     <!-- Category Name -->
-                        <div class="alert alert-info">
-                           <p> Category : <strong> {{ $categoryName }} </strong> </p>
-                        </div>
-                    @endif
+                    @include('blog.alert')              <!-- includes all the alerts -->
                     
-                    @if($authorName)     <!-- Author Name -->
-                        <div class="alert alert-info">
-                        <p> Author : <strong> {{ $authorName }} </strong> </p>
-                        </div>
-                    @endif
-
                     @foreach ($posts_send as $post)     <!-- foreach loop for displaying the posts -->
                             <article class="post-item">
                                 @if ($post->image_url)   <!-- image_url is an alias name of Acessor function -->
