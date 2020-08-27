@@ -143,4 +143,24 @@ class Post extends Model
         return $query->whereNull("published_at");   
     } 
 
+    public function scopeSearch($query,$term)
+    {
+        if($term)
+        {
+            // this function is used for binding the below queries in paranthesis ().
+            $query->where(function($q) use ($term)   
+            {
+                // $q->whereHas('author',function($qr) use ($term){
+                //     $qr->orWhere('name','LIKE',"%{$term}%");
+                // });
+
+                // $q->whereHas('category',function($qr) use ($term){
+                //     $qr->orWhere('title','LIKE',"%{$term}%");
+                // });
+
+                $q->orWhere('title','LIKE',"%{$term}%");
+                $q->orWhere('excerpt','LIKE',"%{$term}%");
+            });
+        }  
+    } 
 }
