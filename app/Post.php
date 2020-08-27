@@ -9,6 +9,7 @@ use GrahamCampbell\Markdown\Facades\Markdown;   # for Markdown i.e for html pres
 
 class Post extends Model
 {
+    public $table = 'posts';
     
     use SoftDeletes;   // This is used to moving the deleted post to the trash called as trait.
 
@@ -24,6 +25,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     // mutator invoked when the published_at contains Null value
