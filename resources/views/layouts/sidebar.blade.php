@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        {{-- <div class="widget">
+        <div class="widget">
             <div class="widget-heading">
                 <h4>Tags</h4>
             </div>
@@ -72,6 +72,6 @@
                     <li><a href="#">React Js</a></li>
                 </ul>
             </div>
-        </div> --}}
+        </div>
     </aside>
 </div>
