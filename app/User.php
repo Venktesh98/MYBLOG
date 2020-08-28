@@ -56,7 +56,7 @@ class User extends Authenticatable
     //     return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
     // }
 
-    // function injecting.
+    // laravel by default finds by using id,so we are overriding id by slug here.
     public function getRouteKeyName()  
     {
         return 'slug';
