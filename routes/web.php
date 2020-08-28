@@ -29,6 +29,7 @@ Route::get('/blog/{postid}', 'BlogController@show')->name('blog.showblog');
 Route::get('/category/{category}','BlogController@category')->name('blog.category');
 
 Route::get('/author/{author}','BlogController@author')->name('blog.author');
+Route::get('/tag/{tag}','BlogController@tag');
 
 
 Auth::routes();
