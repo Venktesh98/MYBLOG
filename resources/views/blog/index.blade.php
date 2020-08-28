@@ -11,7 +11,7 @@
                 @else
                     @include('blog.alert')              <!-- includes all the alerts -->
                     
-                    @foreach ($posts_send as $post)     <!-- foreach loop for displaying the posts -->
+                    @foreach ($posts_send as $post)    <!-- foreach loop for displaying the posts -->                   
                             <article class="post-item">
                                 @if ($post->image_url)   <!-- image_url is an alias name of Acessor function -->
                                     <div class="post-item-image">
@@ -32,6 +32,11 @@
                                                 <li><i class="fa fa-user"></i><a href="{{ route('blog.author',$post->author->slug) }}">{{ $post->author->name }}</a></li>
                                                 <li><i class="fa fa-clock-o"></i><time> {{ $post->date }}</time></li>
                                                 <li><i class="fa fa-folder"></i><a href="{{ route('blog.category',$post->category->slug) }}"> {{ $post->category->title }}</a></li>
+                                                <li><i class="fa fa-tag"></i>
+                                                    @foreach ($post->tags as $tag) 
+                                                        <a href="/tag/{{ $tag->slug }}">{{$loop->first ? '' : ', '}}{{ $tag->name }}</a>
+                                                    @endforeach  
+                                                </li>                                                  
                                                 <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                                             </ul>
                                         </div>
