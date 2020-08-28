@@ -9,7 +9,6 @@ use GrahamCampbell\Markdown\Facades\Markdown;   # for Markdown i.e for html pres
 
 class Post extends Model
 {
-    public $table = 'posts';
     
     use SoftDeletes;   // This is used to moving the deleted post to the trash called as trait.
 
@@ -27,7 +26,7 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tags()
+    public function tags() 
     {
         return $this->belongsToMany(Tag::class);
     }
@@ -122,6 +121,13 @@ class Post extends Model
     {
          return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;  # e is laravel helper function that is used for security purpose.
     }
+
+    // public function getTagsHtmlAttribute($value)
+    // {
+    //     @foreach ($post->tags as $tag) 
+    //         <a href="/tags/{{ $tag->slug }}">{{ $tag->name }}</a>,
+    //     @endforeach  
+    // }
     
     // Scope for fetching the latest post
     public function scopeLatestFirst($query)    # This will be used in the Blogcontroller.php 
