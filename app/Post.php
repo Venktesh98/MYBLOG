@@ -155,10 +155,25 @@ class Post extends Model
         return $query->whereNull("published_at");   
     } 
 
-    public function scopeSearch($query,$term)
+    public function scopeSearch($query,$search)
     {
-        if($term)
+        if(isset($search['month']))
         {
+            $querymonth = $search['month'];
+            $query->whereMonth('published_at',[Carbon::parse($querymonth)->month]);     // Carbon::parse($querymonth) used to convert month into month number 
+        }
+
+        if(isset($search['year'])) 
+        {
+            $queryyear = $search['year'];
+            $query->whereYear('published_at',[$queryyear]);
+        }
+
+        // check if any term entered
+        if(isset($search['term']))
+        { 
+            $queryterm = $search['term'];
+
             // this function is used for binding the below queries in paranthesis ().
             $query->where(function($q) use ($term)   
             {
