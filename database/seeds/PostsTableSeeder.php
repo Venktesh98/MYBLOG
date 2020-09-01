@@ -19,13 +19,15 @@ class PostsTableSeeder extends Seeder
         // generate 10 dummy posts data
         $posts = [];
         $faker = Factory::create();
-        $date = Carbon::create(2020,6,18,9); # carbon api for date manipulation
+        // $date = Carbon::create(2020,6,18,9); # carbon api for date manipulation
+        $date = Carbon::now()->modify('-1 year'); # date manipulation for archives.
 
-        for ($i = 0; $i < 10; $i++)
+
+        for ($i = 0; $i < 36; $i++)
         {
             $image = "Post_Image_" . rand(1, 5) . ".jpg";
             // $date = date("Y-m-d H:i:s");
-            $date->addDays($i);     # will make the clone of this date.
+            $date->addDays(10);     # will make the clone of this date.
             $publishedDate = clone($date);
             $createdDate = clone($date);     # clone will create the same object functionality like original
 
@@ -38,7 +40,7 @@ class PostsTableSeeder extends Seeder
                 'image' => rand(0, 1) == 1 ? $image : NULL,
                 'created_at' => $createdDate,
                 'updated_at' => $createdDate,
-                'published_at' => $i < 5 ? $publishedDate : (rand(0,1) == 0 ? Null : $publishedDate->addDays(4)),
+                'published_at' => $i < 30 ? $publishedDate : (rand(0,1) == 0 ? Null : $publishedDate->addDays(4)),
                 'category_id'=> rand(1,5),
                 'view_count'=>rand(1,10) * 10,
             ];
