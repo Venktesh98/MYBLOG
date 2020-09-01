@@ -68,7 +68,7 @@
                             <li><a href = "#">3</a></li>
                             <li><a href = "#">&raquo;</a></li>
                         </ul> --}}
-                        {{ $posts->appends(request()->query())->links() }}               <!-- for pagination -->
+                        {{ $posts->appends(request()->query())->links() }}      <!-- for pagination and request()->query() is used for requesting data from querystring -->
                     </div>
                     
                     <div class="pull-right">                                    <!-- displays the total number of post -->

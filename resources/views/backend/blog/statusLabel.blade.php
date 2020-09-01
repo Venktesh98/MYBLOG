@@ -1,5 +1,12 @@
 <?php $statusLabel = Request::get('status') ?>
-@if ($statusLabel == 'all')
+
+@if ($statusLabel == 'own')
+    <h1>
+        Blogs
+        <small> <strong> Own Blog Posts </strong> </small>
+    </h1>
+
+@elseif ($statusLabel == 'all')
     <h1>
         Blogs
         <small> <strong> All Blog Posts </strong> </small>

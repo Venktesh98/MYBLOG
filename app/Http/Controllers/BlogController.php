@@ -10,19 +10,19 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    protected $limit = 3;
+    protected $limit = 2;
     
     public function index(Request $request)
     { 
         // $post = Post::all();
         // \DB::enableQueryLog();    # for debugging the database query
 
-        $this->limit = 3;
+        // $this->limit = 3;
         $post = Post::with('author','tags','category')
                     ->latestFirst()
                     ->published()
-                    ->search($request->input('term'))
-                    ->paginate($this->limit);
+                    ->search($request->only(['term','year','month']))
+                    ->simplePaginate($this->limit);
  
         return view('blog.index')->with('posts_send',$post);   # remove return and add render() at last in view statement for DB query
         

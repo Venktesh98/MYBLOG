@@ -35,38 +35,38 @@ class BlogController extends BackendController
         // only shows the items that are in the trash using onlyTrashed()
         if(($status = $request->input('status')) && $status == 'trash')
         {
-            $posts = Post::onlyTrashed()->with('author','category')->latest()->paginate($this->limit);
+            $posts = Post::onlyTrashed()->with('author','category')->latest()->simplePaginate($this->limit);
             $postCount = Post::onlyTrashed()->count(); 
             $onlyTrashed = TRUE;  # flag for showing the trash posts 
         }
 
         elseif($status == 'published')
         {
-            $posts = Post::published()->with('author','category')->latest()->paginate($this->limit);
+            $posts = Post::published()->with('author','category')->latest()->simplePaginate($this->limit);
             $postCount = Post::published()->count();   # counts all the published posts  
         }
 
         elseif($status == 'scheduled')
         {
-            $posts = Post::scheduled()->with('author','category')->latest()->paginate($this->limit);
+            $posts = Post::scheduled()->with('author','category')->latest()->simplePaginate($this->limit);
             $postCount = Post::scheduled()->count();   # counts all the scheduled posts  
         }
 
         elseif($status == 'draft')
         {
-            $posts = Post::draft()->with('author','category')->latest()->paginate($this->limit);
+            $posts = Post::draft()->with('author','category')->latest()->simplePaginate($this->limit);
             $postCount = Post::draft()->count();   # counts all the draft posts  
         }
 
         elseif($status == 'own')
         {
-            $posts = $request->user()->posts()->with('author','category')->latest()->paginate($this->limit);
+            $posts = $request->user()->posts()->with('author','category')->latest()->simplePaginate($this->limit);
             $postCount = $request->user()->posts()->count();   # counts all the draft posts  
         }
  
         else
         {
-            $posts = Post::with('author','category')->latest()->paginate($this->limit);
+            $posts = Post::with('author','category')->latest()->simplePaginate($this->limit);
             $postCount = Post::count();   # counts all the posts  
         }
         

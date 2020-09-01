@@ -16,7 +16,7 @@ class CategoriesController extends BackendController
      */
     public function index()
     {
-       $categories = Category::with('posts')->latest()->paginate($this->limit);
+       $categories = Category::with('posts')->latest()->simplePaginate($this->limit);
        $categoriesCount = Category::count();
 
        return view('backend.categories.index',compact('categories','categoriesCount'));
