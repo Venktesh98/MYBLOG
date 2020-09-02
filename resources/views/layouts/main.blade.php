@@ -12,6 +12,7 @@
 <body>
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
+
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -21,7 +22,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">MyBlog</a>
+              <a class="navbar-brand" href="/">
+                <img src="{{ asset('navimg/blog.jpg') }}" width="100" height="30" style="display: inline-block;">
+                <span style="display: inline-block;">MyBlog</span>
+                {{-- MyBlog --}}
+              </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
