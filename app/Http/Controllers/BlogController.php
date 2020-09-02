@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    protected $limit = 2;
+    protected $limit = 5;
     
     public function index(Request $request)
     { 
@@ -18,7 +18,7 @@ class BlogController extends Controller
         // \DB::enableQueryLog();    # for debugging the database query
 
         // $this->limit = 3;
-        $post = Post::with('author','tags','category')
+        $post = Post::with('author','tags','category','comments')
                     ->latestFirst()
                     ->published()
                     ->search($request->only(['term','year','month']))
@@ -36,7 +36,7 @@ class BlogController extends Controller
         $categoryName = $category->title;
         // $posts = Category::findOrFail($id)->posts()->with('author')->latestFirst()->paginate($this->limit); 
         $posts = $category->posts()
-                        ->with('author','tags')
+                        ->with('author','tags','comments')
                         ->latestFirst()
                         ->paginate($this->limit);
 
@@ -56,7 +56,7 @@ class BlogController extends Controller
         // $this->limit = 3;
         $authorName = $author->name;
         $posts = $author->posts()
-                    ->with('category','author')
+                    ->with('category','author','comments')
                     ->latestFirst()
                     ->paginate($this->limit);
 
@@ -69,7 +69,7 @@ class BlogController extends Controller
         // $this->limit = 3;
         $tagName = $tag->title;
         $posts = $tag->posts()
-                    ->with('author','tags')
+                    ->with('author','tags','commenst ')
                     ->latestFirst()
                     ->published()
                     ->paginate($this->limit);
