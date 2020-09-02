@@ -37,7 +37,7 @@
                                                         <a href="/tag/{{ $tag->slug }}">{{$loop->first ? '' : ','}}{{ $tag->name }}</a>
                                                     @endforeach  
                                                 </li>                                                  
-                                                <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
+                                                <li><i class="fa fa-comments"></i><a href="{{ route('blog.showblog',$post->slug) }}#post-comments">{{ $post->commentsNumber('Comment') }}</a></li>
                                             </ul>
                                         </div>
                                         <div class="pull-right">

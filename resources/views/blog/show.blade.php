@@ -18,15 +18,15 @@
 
                             <div class="post-meta no-border">
                                 <ul class="post-meta-group">
-                                    <li><i class="fa fa-user"></i><a href="{{ route('blog.author',$posts->author->slug) }}"> {{$posts->author->name}}</a></li>
+                                    <li><i class="fa fa-user"></i><a href="{{ route('blog.author',$posts->author->slug) }}" style="color:blueviolet"> <strong> {{$posts->author->name}} </strong> </a></li>
                                     <li><i class="fa fa-clock-o"></i><time> {{$posts->date}}</time></li>
                                     <li><i class="fa fa-folder"></i><a href="{{ route('blog.category',$posts->category->slug) }}"> {{$posts->category->title }}</a></li>
                                     <li><i class="fa fa-tag"></i>
                                         @foreach ($posts->tags as $tag) 
                                             <a href="/tag/{{ $tag->slug }}">{{$loop->first ? '' : ', '}}{{ $tag->name }}</a>
-                                        @endforeach  
+                                        @endforeach
                                     </li> 
-                                    <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
+                                    <li><i class="fa fa-comments"></i><a href="#post-comments"> {{ $posts->commentsNumber('Comment') }}</a></li>
                                 </ul>
                             </div>
                                 {!! $posts->body_html !!}  <!-- Accessor function i.e body_html - from post model -->
@@ -58,7 +58,7 @@
                 </article>
 
                 <!-- comments here -->
-                {{-- @include('blog.comments') --}}
+                @include('blog.comments')
             </div>
             @include('layouts.sidebar') 
         </div>
