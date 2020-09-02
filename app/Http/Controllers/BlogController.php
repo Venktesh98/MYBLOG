@@ -48,7 +48,10 @@ class BlogController extends Controller
     {
         // $post = Post::findOrFail($id);
         $postid->increment('view_count');       // updating the view count whenever user refresh it.
-        return view('blog.show')->with("posts",$postid);
+
+        $postComments = $postid->comments()->simplePaginate(3);
+
+        return view('blog.show')->with("posts",$postid)->with('postComments',$postComments);
     }   
 
     public function author(User $author)

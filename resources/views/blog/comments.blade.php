@@ -3,7 +3,7 @@
 
     <div class="comment-body padding-10">
         <ul class="comments-list">
-            @foreach ($posts->comments as $comment)     <!-- comments is a function accessed from the Post model as we made the felationship -->
+            @foreach ($postComments as $comment)     <!-- comments is a function accessed from the Post model as we made the felationship -->
                 <li class="comment-item">
                     <div class="comment-heading clearfix">
                         <div class="comment-author-meta">
@@ -16,6 +16,12 @@
                 </li>
             @endforeach
         </ul>
+
+        <div class="text-right">
+            <nav>
+                {{ $postComments->links() }}
+            </nav>
+        </div>
 
     </div>
 
