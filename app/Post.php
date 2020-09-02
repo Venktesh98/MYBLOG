@@ -37,6 +37,13 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function commentsNumber($label = 'Comment')
+    {
+        $commentsNumber = $this->comments->count();
+
+        return $commentsNumber . " " . str_plural($label,$commentsNumber);
+    }
+
     // mutator invoked when the published_at contains Null value
     public function setPublishedAtAttribute($value)
     {
