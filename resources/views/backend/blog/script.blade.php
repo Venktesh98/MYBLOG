@@ -1,5 +1,12 @@
+@section('style')
+    <link rel="stylesheet" href="/backend/plugins/tag-editor/jquery.tag-editor.css">
+@endsection
+
 @section('script')
+    <script src="/backend/plugins/tag-editor/jquery.caret.min.js"></script>
+    <script src="/backend/plugins/tag-editor/jquery.tag-editor.min.js"></script>
     <script type = text/javascript>
+        
         $('ul.pagination').addClass('no-margin pagination-sm');
 
       // Javascript code for adding the slug automatically based on the Title
@@ -28,5 +35,17 @@
             $('#published_at').val(""); 
             $('#post-form').submit();    // invokes the Form here
         });
+
+        // this is for the edit of the tag to display the existing tags.
+        var options = {};
+        @if($post->exists)
+            options = { 
+                // initialTags: {!! json_encode($post->tags->pluck('name')) !!},   // json_encode Converts the php array into js array
+                initialTags: {!! $post->tags_list !!},
+            };
+        @endif
+
+        $('input[name=post_tags]').tagEditor(options);
+
     </script>
 @endsection

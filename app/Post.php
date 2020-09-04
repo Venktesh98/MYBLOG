@@ -4,12 +4,14 @@ namespace App;
 
 use App\Comment;
 use Illuminate\Database\Eloquent\Model;
+// use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;                              # for date and time had use the carbon api.
 use GrahamCampbell\Markdown\Facades\Markdown;   # for Markdown i.e for html presentation of contents on the blog
 
 class Post extends Model
 {
+    // use Taggable;
     
     use SoftDeletes;   // This is used to moving the deleted post to the trash called as trait.
 
@@ -42,6 +44,31 @@ class Post extends Model
         $commentsNumber = $this->comments->count();
 
         return $commentsNumber . " " . str_plural($label,$commentsNumber);
+    }
+
+    public function createTags($tagString)
+    {
+        $tags = explode(",",$tagString);          // converts the string into array
+        $tagIds = [];
+
+        foreach ($tags as $tag) 
+        {    
+        
+            // $newTag = new Tag();
+            // $newTag->name = ucwords(trim($tag));
+            // $newTag->slug = str_slug($tag);
+            // $newTag->save(); 
+            
+            // firstOrCreate() is used to find that the data exists in the database or not
+            $newTag = Tag::firstOrCreate(
+                ['slug' => str_slug($tag),'name' => ucwords(trim($tag))]
+            );
+
+            $tagIds[] = $newTag->id;
+        }
+
+        // $this->tags()->attach($tagIds);
+        $this->tags()->sync($tagIds);
     }
 
     // mutator invoked when the published_at contains Null value
@@ -132,7 +159,12 @@ class Post extends Model
     // Accessor Function for getting the html attribute for excerpt
     public function getExcerptHtmlAttribute($value)
     {
-         return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;  # e is laravel helper function that is used for security purpose.
+        return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;  # e is laravel helper function that is used for security purpose.
+    }
+
+    public function getTagsListAttribute()
+    {
+        return $this->tags->pluck('name');
     }
 
     // public function getTagsHtmlAttribute($value)
@@ -188,7 +220,7 @@ class Post extends Model
             $queryterm = $search['term'];
 
             // this function is used for binding the below queries in paranthesis ().
-            $query->where(function($q) use ($term)   
+            $query->where(function($q) use ($queryterm)   
             {
                 // $q->whereHas('author',function($qr) use ($term){
                 //     $qr->orWhere('name','LIKE',"%{$term}%");
@@ -198,12 +230,11 @@ class Post extends Model
                 //     $qr->orWhere('title','LIKE',"%{$term}%");
                 // });
 
-                $q->orWhere('title','LIKE',"%{$term}%");
-                $q->orWhere('excerpt','LIKE',"%{$term}%");
+                $q->Where('title','LIKE',"%{$queryterm}%");
+                $q->orWhere('excerpt','LIKE',"%{$queryterm}%");
             });
         }  
     } 
-
     // public function getRouteKeyName()
     // {
     //     return 'slug';

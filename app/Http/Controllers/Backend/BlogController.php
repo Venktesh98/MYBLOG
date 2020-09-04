@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use config;
+use App\Tag;
 use App\Post;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -107,11 +108,12 @@ class BlogController extends BackendController
      */
     public function store(Requests\PostRequest $request)
     {
-        $data = $this->handleRequest($request);
+        $data = $this->handleRequest($request);        // Contains the image uploading stuff.
 
         // here user() is to get the current user who makes the request.
-        $request->user()->posts()->create($data);   # can also be used $request->only('title') or any any attribute to get.
-
+        $newPost = $request->user()->posts()->create($data);   # can also be used $request->only('title') or any any attribute to get.
+        $newPost->createTags($data["post_tags"]);
+        
         # Can also be done by this way
         // $post = new Post;
         // $post->title = request('title');
@@ -191,7 +193,7 @@ class BlogController extends BackendController
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('backend.blog.edit',compact('post'));
+        return view('backend.blog.edit',compact('post','newtag'));
     }
 
     /**
@@ -207,6 +209,7 @@ class BlogController extends BackendController
         $oldImage  = $post->image;
         $data = $this->handleRequest($request);
         $post->update($data);                                   # updates in the DB.
+        $post->createTags($data['post_tags']);
 
         if($oldImage!= $post->image)
         {

@@ -12,6 +12,10 @@
                     </div>
                     <div class="comment-content">
                         {!! $comment->body_html !!}     <!-- Accessor function from Comment model -->
+
+                        @if (isset($postComments))
+                            <a href="{{ $comment->author_url }}">{!! $comment->author_url !!}</a>                           
+                        @endif
                     </div>
                 </li>
             @endforeach

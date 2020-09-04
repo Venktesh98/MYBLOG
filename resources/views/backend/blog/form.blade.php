@@ -43,25 +43,46 @@
   </div> 
   <!-- column-xs-8 -->
   <div class="col-xs-3">
-
+    {{-- For Category --}}
       <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Category</h3>
         </div>
-
         <div class="box-body">
-          <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-              {!! Form::select('category_id',App\Category::pluck('title','id'),null,['class'=>'form-control','placeholder'=>'Choose Category']) !!}
+            <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
+                {!! Form::select('category_id',App\Category::pluck('title','id'),null,['class'=>'form-control','placeholder'=>'Choose Category']) !!}
 
-              @if($errors->has('category_id'))
-                  <span class='help-block'>{{ $errors->first('category_id') }}</span>
-              @endif
-          </div>
+                @if($errors->has('category_id'))
+                    <span class='help-block'>{{ $errors->first('category_id') }}</span>
+                @endif
+            </div>
+        </div>
+      </div>
+
+          {{-- For Tags --}}
+            <?php 
+                  // $data = $post->tags->pluck('name')->toArray() ;
+      
+                  // $tagstring='';
+                  // foreach ($data as $value){
+                  //     $tagString .=  $value.',';
+                  // }
+                  // dd($string);
+            ?>
+
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Tags</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    {{-- {!! Form::text('post_tags',$tagString,null, ['class' => 'form-control']) !!} --}}
+                    {!! Form::text('post_tags',null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
         </div>
 
-      </div>
-      
-      <div class="box">
+        <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Feature Image</h3>
         </div>

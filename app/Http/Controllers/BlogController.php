@@ -38,6 +38,7 @@ class BlogController extends Controller
         $posts = $category->posts()
                         ->with('author','tags','comments')
                         ->latestFirst()
+                        ->published()
                         ->paginate($this->limit);
 
         return view('blog.index')->with('posts_send',$posts)->with('categoryName',$categoryName);
@@ -61,6 +62,7 @@ class BlogController extends Controller
         $posts = $author->posts()
                     ->with('category','author','comments')
                     ->latestFirst()
+                    ->published()
                     ->paginate($this->limit);
 
         return view('blog.index')->with('posts_send',$posts)->with('authorName',$authorName);
@@ -72,10 +74,10 @@ class BlogController extends Controller
         // $this->limit = 3;
         $tagName = $tag->title;
         $posts = $tag->posts()
-                    ->with('author','tags','commenst ')
+                    ->with('author','tags','comments')
                     ->latestFirst()
                     ->published()
-                    ->paginate($this->limit);
+                    ->simplePaginate($this->limit);
 
         return view('blog.index')->with('posts_send',$posts)->with('tagName',$tagName);
     }
