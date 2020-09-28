@@ -19,7 +19,7 @@ class BlogController extends BackendController
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
 
     public function __construct()
     {
@@ -179,7 +179,7 @@ class BlogController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id)     
     {
         //
     }
@@ -193,7 +193,7 @@ class BlogController extends BackendController
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('backend.blog.edit',compact('post','newtag'));
+        return view('backend.blog.edit',compact('post'));
     }
 
     /**

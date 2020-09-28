@@ -33,6 +33,7 @@ class NavigationComposer
         $view->with('popularposts',$popular_posts);
     }  
     
+    
     private function composeTags(View $view)
     {
         $tags = Tag::has('posts')->get();
@@ -42,7 +43,8 @@ class NavigationComposer
 
     private function composeArchives(View $view)
     {
-        $archives = Post::selectRaw('count(id) as post_count,year(published_at) year,monthname(published_at) month')
+        // $archives = Post::selectRaw('count(id) as post_count,year(published_at) year,monthname(published_at) month')
+        $archives = Post::selectRaw('count(id) as post_count,year(published_at) year,month(published_at) month')   // for postgres sql
                             ->published()
                             ->groupBy('year','month')
                             ->orderByRaw('min(published_at) desc')->get();

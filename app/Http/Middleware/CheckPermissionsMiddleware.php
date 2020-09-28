@@ -75,10 +75,10 @@ class CheckPermissionsMiddleware
         //     }
         // }
 
-        if( !check_user_permissions($request))
+        if( !check_user_permissions($request))   // if user dont have permission 
         {
             abort(403,"Forbidden Access!");
         }
-        return $next($request);
+        return $next($request);            // if have permission will execute it
     }
 }

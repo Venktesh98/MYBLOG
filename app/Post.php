@@ -205,9 +205,10 @@ class Post extends Model
         if(isset($search['month']))
         {
             $querymonth = $search['month'];
-            $query->whereMonth('published_at',[Carbon::parse($querymonth)->month]);     // Carbon::parse($querymonth) used to convert month into month number 
+            // $query->whereMonth('published_at',[Carbon::parse($querymonth)->month]);     // Carbon::parse($querymonth) used to convert month into month number 
+            $query->whereMonth('published_at',[$querymonth]);      // for postgres sql
         }
-
+ 
         if(isset($search['year'])) 
         {
             $queryyear = $search['year'];
