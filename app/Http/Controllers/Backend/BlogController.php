@@ -7,19 +7,12 @@ use App\Tag;
 use App\Post;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use UxWeb\SweetAlert\SweetAlert;
 use Intervention\Image\Facades\Image;
-// use App\Http\Requests\PostRequest;
-// use App\Http\Controllers\Controller;
 
 class BlogController extends BackendController
 {
     protected $uploadPath;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */ 
 
     public function __construct()
     {
@@ -73,6 +66,7 @@ class BlogController extends BackendController
         
         $statusList = $this->statusList($request);
         // $postCount = $this->limit; # counts only the posts that are on the page.
+
         return view('backend.blog.index',compact('posts','postCount','onlyTrashed','statusList'));
     }
 
@@ -89,23 +83,12 @@ class BlogController extends BackendController
         ];
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Post $posts)
     {
-
+       
         return view('backend.blog.create',compact('posts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Requests\PostRequest $request)
     {
         $data = $this->handleRequest($request);        // Contains the image uploading stuff.
@@ -114,18 +97,8 @@ class BlogController extends BackendController
         $newPost = $request->user()->posts()->create($data);   # can also be used $request->only('title') or any any attribute to get.
         $newPost->createTags($data["post_tags"]);
         
-        # Can also be done by this way
-        // $post = new Post;
-        // $post->title = request('title');
-        // $post->slug = request('slug');
-        // $post->excerpt = request('excerpt');
-        // $post->body = request('body');
-        // $post->published_at = request('published_at');
-        // $post->category_id = request('category_id');
-        // $post->author_id = auth()->user()->id;
-
-        // $post->save();
-        return redirect('/backend/blog')->with('message','Your Post has been Created Successfully!');
+        alert()->success('From MYBLOG','Your Post has been Created Successfully!')->autoclose(3500);
+        return redirect('/backend/blog');
     }
 
     // used for handling the request for image uploading
@@ -173,36 +146,18 @@ class BlogController extends BackendController
         return $data;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)     
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $post = Post::findOrFail($id);
         return view('backend.blog.edit',compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Requests\PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
@@ -216,29 +171,30 @@ class BlogController extends BackendController
             $this->removeImage($oldImage);                      # removes the old Image from the server
         }
 
-        return redirect('/backend/blog')->with('message','Your Post was Updated Successfully!');
+        alert()->success('From MYBLOG','Your Post has been Updated Successfully!')->autoclose(3500);
+        return redirect('/backend/blog');
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
         $post->delete();
+
         return redirect('/backend/blog')->with('trash-message',['Your Post moved to Trash',$id]);
-        // dd($post);
+        // alert()->error('From MYBLOG','Your Post has been Moved to Trash!')->autoclose(3500);
+        // return redirect('/backend/blog');    
     }
 
-    public function restore($id)
+    public function restore($id)    
     {
         $post = Post::withTrashed()->findOrFail($id);
         $post->restore();
 
-        return redirect()->back()->with('message','Your Post has been restored from Trash!');
+        alert()->success('From MYBLOG','Your Post has been restored from Trash!')->autoclose(3500);
+        return redirect()->back();
+
+        // return redirect()->back()->with('message','Your Post has been restored from Trash!');
     }
 
     // will forcefully deletes the post.
@@ -249,7 +205,8 @@ class BlogController extends BackendController
 
         $this->removeImage($post->image);                   # removes the image from the database
     
-        return redirect('backend/blog?status=trash')->with('message','Your Post has been Deleted Successfully!');
+        alert()->info('From MYBLOG','Your Post has been Deleted Successfully!')->autoclose(3500);
+        return redirect('backend/blog?status=trash');
     }
 
     // used for removing the image permanently from the server.

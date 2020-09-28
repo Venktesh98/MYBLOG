@@ -10,6 +10,8 @@ use App\Post;
         // dd($currentUser);   
 
         // get current action name
+        // dd($actionName); 
+        
         if($actionName)
         {
             $currentActionName = $actionName;   // gets the controller path here
@@ -19,9 +21,11 @@ use App\Post;
             $currentActionName = $request->route()->getActionName();    // gets the full controller path 
         }
 
+        // dd($currentActionName);
+
         list($controller,$method) = explode('@',$currentActionName);    # separates according to the @ 
         $controller = str_replace(["App\\Http\\Controllers\\Backend\\","Controller"],"",$controller);
-
+        
         $crudPermissionMaps = [
 
             // 'create' =>['create','store'],    # create will be mapped as create and store method in controller

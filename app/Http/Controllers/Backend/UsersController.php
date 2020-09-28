@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class UsersController extends BackendController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
        $users = User::orderBy('name')->paginate($this->limit);
@@ -22,22 +17,11 @@ class UsersController extends BackendController
        return view('backend.users.index',compact('users','usersCount'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(User $user)
     {
         return view('backend.users.create',compact('user'));  
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Requests\UserStoreRequest $request)
     {
 
@@ -46,23 +30,11 @@ class UsersController extends BackendController
         return redirect('/backend/users')->with('message','New User Created Successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::findOrFail($id);
@@ -70,13 +42,6 @@ class UsersController extends BackendController
         return view('backend.users.edit',compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Requests\UserUpdateRequest $request, $id)
     {
        
@@ -89,12 +54,6 @@ class UsersController extends BackendController
         return redirect('/backend/users')->with('message','Your User Updated Successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Requests\UserDestroyRequest $request, $id)
     {
         $user = User::findOrFail($id);

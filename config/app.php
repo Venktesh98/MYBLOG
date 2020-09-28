@@ -140,6 +140,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
@@ -199,6 +200,7 @@ return [
     */
 
     'aliases' => [
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,

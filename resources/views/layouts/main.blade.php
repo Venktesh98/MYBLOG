@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="/">
-                <img src="{{ asset('navimg/blog.jpg') }}" width="100" height="30" style="display: inline-block;">
+                {{-- <img src="{{ asset('navimg/blog.jpg') }}" width="100" height="30" style="display: inline-block;"> --}}
                 <span style="display: inline-block;">MyBlog</span>
                 {{-- MyBlog --}}
               </a>
@@ -42,7 +42,10 @@
                 <li class="active"><a href="/">Blog</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
+                <li><a href="/login" style="font-size: 18px; color:rgb(0, 153, 255); " ><i class="fa fa-sign-in" aria-hidden="true"> Sign In</i></a></li>
               </ul>
+              
+            </div>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container -->
         </nav>

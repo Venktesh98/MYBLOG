@@ -43,7 +43,8 @@
         
               <!-- /.box-header -->
               <div class="box-body ">
-                   @include('backend.messages.message')
+                   @include('backend.messages.message') 
+                   {{-- @include('sweet::alert') --}}
 
                     @if ( !$posts->count())
                         <div class="alert alert-danger">
@@ -61,13 +62,6 @@
               <!-- /.box-body -->
               <div class="box-footer clearfix">
                   <div class="pull-left">
-                        {{-- <ul class="pagination no-margin">
-                            <li><a href = "#">&laquo;</a></li>
-                            <li><a href = "#">1</a></li>
-                            <li><a href = "#">2</a></li>
-                            <li><a href = "#">3</a></li>
-                            <li><a href = "#">&raquo;</a></li>
-                        </ul> --}}
                         {{ $posts->appends(request()->query())->links() }}      <!-- for pagination and request()->query() is used for requesting data from querystring -->
                     </div>
                     

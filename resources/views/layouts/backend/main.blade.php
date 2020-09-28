@@ -23,6 +23,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css"> <!-- css for file upload -->
   <link rel="stylesheet" href="/backend/css/custom.css"> <!-- contains the custom css for the body & excerpt -->
 
+  {{-- sweeet alert pacakages --}}
+  <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+	<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   @yield('style')
@@ -41,6 +47,7 @@
 
     @include('layouts.backend.sidebar')
 
+    @include('sweet::alert')                <!-- included Sweet alert -->
   <!-- Content Wrapper. Contains page content -->
     @yield('content')
 

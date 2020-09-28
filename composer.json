@@ -13,7 +13,8 @@
         "intervention/image": "^2.5",
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "5.3.0",
-        "santigarcor/laratrust": "4.0.*"
+        "santigarcor/laratrust": "4.0.*",
+        "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

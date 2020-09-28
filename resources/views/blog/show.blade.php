@@ -40,7 +40,7 @@
                         <?php $author = $posts->author; ?> <!-- defining a variable --> 
                             <div class="media-left">
                                 <a href="{{ route('blog.author',$author->slug) }}">  <!-- gets the author image here -->
-                                <img alt="{{ $author->name }}" width="100" height= "100%" src="{{ $author->gravatar() }}" class="media-object">
+                                <img alt="{{ $author->name }}" width="100" height= "100" src="{{ $author->gravatar() }}" class="media-object">
                                 </a>
                             </div>
                             <div class="media-body">

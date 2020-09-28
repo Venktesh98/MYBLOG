@@ -74,6 +74,7 @@ class CheckPermissionsMiddleware
         //         break;
         //     }
         // }
+        
 
         if( !check_user_permissions($request))   // if user dont have permission 
         {

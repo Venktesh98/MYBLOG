@@ -29,7 +29,9 @@
                 <img src="{{ Auth::user()->gravatar() }}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{ Auth::user()->name }} - {{Auth::user()->roles->first()->display_name}}
+                  {{ Auth::user()->name }} - {{Auth::user()->roles->first()->display_name ? Auth::user()->roles->first()->display_name : 'User' }} 
+                      
+                   {{-- {{Auth::user()->roles->first()->display_name}}  --}}
                 </p>
 
               </li>

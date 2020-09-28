@@ -71,6 +71,36 @@
             ?>
 
         <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Publish</h3>
+          </div>
+          <div class="box-body">
+              <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                {!! Form::label('published_at',"Published Date") !!}
+                <div class='input-group date' id='datetimepicker1'>
+                    {!! Form::text('published_at',null,['class'=>'form-control','placeholder'=>'YYYY-MM-DD HH:mm:ss']) !!}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                
+                @if ($errors->has('published_at'))
+                    <span class='help-block'>{{ $errors->first('published_at') }}</span>
+                @endif
+              </div>
+          </div>
+          
+          <div class="box-footer clearfix">
+              <div class="pull-left">
+                <a id="draft-btn" class="btn btn-default">Save Draft</a>
+              </div>
+              <div class="pull-right">
+                {!! Form::submit('Publish',['class'=>'btn btn-primary'])!!}
+              </div>
+          </div>
+        </div>
+
+        <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Tags</h3>
             </div>
@@ -107,34 +137,6 @@
         </div>
       </div>
 
-      <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Publish</h3>
-        </div>
-        <div class="box-body">
-            <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-              {!! Form::label('published_at',"Published Date") !!}
-              <div class='input-group date' id='datetimepicker1'>
-                  {!! Form::text('published_at',null,['class'=>'form-control','placeholder'=>'YYYY-MM-DD HH:mm:ss']) !!}
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-              
-              @if ($errors->has('published_at'))
-                  <span class='help-block'>{{ $errors->first('published_at') }}</span>
-              @endif
-            </div>
-        </div>
-        <div class="box-footer clearfix">
-            <div class="pull-left">
-              <a id="draft-btn" class="btn btn-default">Save Draft</a>
-            </div>
-            <div class="pull-right">
-              {!! Form::submit('Publish',['class'=>'btn btn-primary'])!!}
-            </div>
-        </div>
-      </div>
 
   </div>
 </div>
