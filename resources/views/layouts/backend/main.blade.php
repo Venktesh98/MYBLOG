@@ -31,25 +31,20 @@
 
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
   @yield('style')
-  
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    @include('layouts.backend.navbar')
+    @include('layouts.backend.navbar')               <!-- Navbar -->
 
-    @include('layouts.backend.sidebar')
+    @include('layouts.backend.sidebar')              <!-- Sidebar -->
 
     @include('sweet::alert')                <!-- included Sweet alert -->
   <!-- Content Wrapper. Contains page content -->
-    @yield('content')
+    @yield('content')                         <!-- yeilds content here -->
 
   <!-- /.content-wrapper -->
   @include('layouts.backend.footer')
