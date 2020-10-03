@@ -95,7 +95,7 @@ class BlogController extends BackendController
 
         // here user() is to get the current user who makes the request.
         $newPost = $request->user()->posts()->create($data);   # can also be used $request->only('title') or any any attribute to get.
-        $newPost->createTags($data["post_tags"]);
+        $newPost->createTags($data["post_tags"]);              // comes from the form 
         
         alert()->success('From MYBLOG','Your Post has been Created Successfully!')->autoclose(3500);
         return redirect('/backend/blog');
@@ -179,6 +179,7 @@ class BlogController extends BackendController
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        // dd($post);
         $post->delete();
 
         return redirect('/backend/blog')->with('trash-message',['Your Post moved to Trash',$id]);
