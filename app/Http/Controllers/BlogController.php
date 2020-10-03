@@ -12,7 +12,7 @@ class BlogController extends Controller
 {
     protected $limit = 5;
     
-    public function index(Request $request)
+    public function index(Request $request)  
     { 
         // $post = Post::all();
         // \DB::enableQueryLog();    # for debugging the database query

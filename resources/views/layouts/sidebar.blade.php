@@ -84,5 +84,7 @@
                     @endforeach
                 </ul>
             </div>
+        </div>
+        <br>
     </aside>
 </div>

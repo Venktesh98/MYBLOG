@@ -16,16 +16,21 @@
   <link rel="stylesheet" href="/backend/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('navimg/myblog.svg') }}">  <!-- favicon -->
+
   <link rel="stylesheet" href="/backend/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="/backend/plugins/simplemde/simplemde.min.css">  <!-- css for body and excerpt -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css"> <!-- css for datetimepicker -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">   <!-- icons for datetimepicker -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css"> <!-- css for file upload -->
+
+  <!-- css for datetimepicker -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/> 
+  <link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+  
   <link rel="stylesheet" href="/backend/css/custom.css"> <!-- contains the custom css for the body & excerpt -->
 
   {{-- sweeet alert pacakages --}}
-  <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-	<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+  {{-- <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+	<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script> --}}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 

@@ -5,7 +5,7 @@
             <td>Title</td>
             <td width = "100">Author</td>
             <td width = "160">Category</td>
-            <td width = "180">Date</td>
+            <td width = "190">Date</td>
         </tr>
     </thead>
     <tbody>

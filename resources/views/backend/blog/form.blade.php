@@ -80,7 +80,7 @@
                 <div class='input-group date' id='datetimepicker1'>
                     {!! Form::text('published_at',null,['class'=>'form-control','placeholder'=>'YYYY-MM-DD HH:mm:ss']) !!}
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                      <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
                 

@@ -49,12 +49,13 @@
                     @endforeach
                 @endif
                     <div class="text-right">
-                        <ul class="pagination pagination-lg justify-content-center">
+                        <ul class="pagination">
                             <nav>
                                 {{$posts_send->appends(request()->only(['term','month','year'])) }}   <!-- for pagination and also for getting year and month from querystring -->
                             </nav>
                         </ul>
                     </div>
+                    <br>
             </div>  
                 @include('layouts.sidebar')
         </div>

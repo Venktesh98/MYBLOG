@@ -59,6 +59,7 @@
 
                 <!-- comments here -->
                 @include('blog.comments')
+                <br><br>
             </div>
             @include('layouts.sidebar') 
         </div>

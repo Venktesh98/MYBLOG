@@ -26,7 +26,7 @@
 
         $('#datetimepicker1').datetimepicker({
             format:'YYYY-MM-DD HH:mm:ss',
-            showClear:true
+            showClear:true,
         });
 
         // Event Handler for the Save Draft.

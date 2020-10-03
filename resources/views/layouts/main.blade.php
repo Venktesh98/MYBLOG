@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('navimg/myblog.svg') }}">  <!-- favicon -->
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">    
@@ -22,16 +23,18 @@
 
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header" style="padding: 0px">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#the-navbar-collapse" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">
+
+              <a class="navbar-brand" href="/" style="padding: 12px">
+                <img src="{{ asset('navimg/myblog.svg') }}" width="100px" height="30px" alt="" style="display: inline-block; padding-left: 65px; margin-bottom: 9px" >
                 {{-- <img src="{{ asset('navimg/blog.jpg') }}" width="100" height="30" style="display: inline-block;"> --}}
-                <span style="display: inline-block;">MyBlog</span>
+                <span style="margin-bottom: 20px">MyBlog</span>
                 {{-- MyBlog --}}
               </a>
             </div>

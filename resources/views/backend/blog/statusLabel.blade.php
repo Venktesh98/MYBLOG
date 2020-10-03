@@ -30,9 +30,14 @@
         <small> <strong> Draft Blog Posts </strong> </small>
     </h1>
 
-@else
+@elseif ($statusLabel == 'trash')
     <h1>
         Blogs
         <small> <strong> Trashed Blog Posts </strong> </small>
+    </h1>
+@else
+    <h1>
+        Blogs
+        <small> <strong> Blog Posts </strong> </small>
     </h1>
 @endif
